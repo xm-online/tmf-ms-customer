@@ -56,6 +56,8 @@ management:
 spring:
     application:
         name: customer
+    jackson:
+        default-property-inclusion: non_null
     cloud:
         consul:
             discovery:

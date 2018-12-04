@@ -366,6 +366,9 @@ definitions:
                 type: string
                 description: Generic attribute containing the link to the schema that defines
                     the structure of the class type of the current object.
+            "type":
+                type: string
+                description: Generic attribute containing the name of the resource class type
             href:
                 type: string
                 description: Url used to reference the party role.
@@ -389,10 +392,6 @@ definitions:
                 description: The time period that the PartyRole is valid for.
             engagedParty:
                 "$ref": "#/definitions/PartyRef"
-            type:
-                "$ref": "#/definitions/RoleTypeRef"
-                description: The role type - useful only in the context of a partnership defining
-                    more than one role type.
             account:
                 type: array
                 items:
@@ -439,6 +438,9 @@ definitions:
                 type: string
                 description: Generic attribute containing the link to the schema that defines
                     the structure of the class type of the current object.
+            "type":
+                type: string
+                description: Generic attribute containing the name of the resource class type
             name:
                 type: string
                 description: A word, term, or phrase by which the PartyRole is known and distinguished
@@ -456,10 +458,6 @@ definitions:
                 description: The time period that the PartyRole is valid for.
             engagedParty:
                 "$ref": "#/definitions/PartyRef"
-            type:
-                "$ref": "#/definitions/RoleTypeRef"
-                description: The role type - useful only in the context of a partnership defining
-                    more than one role type.
             account:
                 type: array
                 items:
@@ -504,6 +502,9 @@ definitions:
                 type: string
                 description: Generic attribute containing the link to the schema that defines
                     the structure of the class type of the current object.
+            "type":
+                type: string
+                description: Generic attribute containing the name of the resource class type
             name:
                 type: string
                 description: A word, term, or phrase by which the PartyRole is known and distinguished
@@ -521,10 +522,6 @@ definitions:
                 description: The time period that the PartyRole is valid for.
             engagedParty:
                 "$ref": "#/definitions/PartyRef"
-            type:
-                "$ref": "#/definitions/RoleTypeRef"
-                description: The role type - useful only in the context of a partnership defining
-                    more than one role type.
             account:
                 type: array
                 items:
