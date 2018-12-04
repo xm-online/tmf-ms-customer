@@ -1,6 +1,6 @@
 package com.icthh.xm.tmf.ms.customer.config;
 
-import com.sun.prism.ResourceFactory;
+import com.icthh.xm.commons.permission.access.ResourceFactory;
 import org.springframework.stereotype.Component;
 
 @Component

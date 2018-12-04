@@ -1,3 +1,5 @@
+package com.icthh.xm.tmf.ms.customer.config;
+
 import com.icthh.xm.commons.lep.spring.web.LepInterceptor;
 import com.icthh.xm.commons.web.spring.TenantInterceptor;
 import com.icthh.xm.commons.web.spring.XmLoggingInterceptor;
