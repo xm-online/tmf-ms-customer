@@ -1,10 +1,10 @@
 package com.icthh.xm.tmf.ms.customer.config;
 
-import com.icthh.xm.tmf.ms.customer.config.oauth2.OAuth2JwtAccessTokenConverter;
-import com.icthh.xm.tmf.ms.customer.config.oauth2.OAuth2Properties;
-import com.icthh.xm.tmf.ms.customer.security.oauth2.OAuth2SignatureVerifierClient;
+import com.icthh.xm.commons.security.oauth2.ConfigSignatureVerifierClient;
+import com.icthh.xm.commons.security.oauth2.OAuth2JwtAccessTokenConverter;
+import com.icthh.xm.commons.security.oauth2.OAuth2Properties;
+import com.icthh.xm.commons.security.oauth2.OAuth2SignatureVerifierClient;
 import com.icthh.xm.tmf.ms.customer.security.AuthoritiesConstants;
-
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.loadbalancer.RestTemplateCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
@@ -58,6 +57,12 @@ public class SecurityConfiguration extends ResourceServerConfigurerAdapter {
     public JwtAccessTokenConverter jwtAccessTokenConverter(OAuth2SignatureVerifierClient signatureVerifierClient) {
         return new OAuth2JwtAccessTokenConverter(oAuth2Properties, signatureVerifierClient);
     }
+
+    @Bean
+    public ConfigSignatureVerifierClient configSignatureVerifierClient(@Qualifier("loadBalancedRestTemplate") RestTemplate restTemplate) {
+        return new ConfigSignatureVerifierClient(oAuth2Properties, restTemplate);
+    }
+
 
     @Bean
 	@Qualifier("loadBalancedRestTemplate")

@@ -129,7 +129,9 @@ jhipster:
 
 logging:
     file: build/customer.log
-
+base-package: com.icthh.xm.tmf.ms.customer
+xm-config:
+    enabled: false
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class
