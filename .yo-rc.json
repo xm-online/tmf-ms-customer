@@ -1,0 +1,35 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.icthh.xm.tmf.ms.customer"
+    },
+    "jhipsterVersion": "5.3.4",
+    "applicationType": "microservice",
+    "baseName": "customer",
+    "packageName": "com.icthh.xm.tmf.ms.customer",
+    "packageFolder": "com/icthh/xm/tmf/ms/customer",
+    "serverPort": "8711",
+    "authenticationType": "uaa",
+    "uaaBaseName": "uaa",
+    "cacheProvider": "no",
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Memory",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "consul",
+    "buildTool": "gradle",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NzQyZTVjMDZjM2E0YTUwZTA2MGYxOGVkYzU3MDJkZjMxMjM3N2QwYTAxNzJhYjMzOTY5ZGYxMjQ4NDg3ZDMyZThiYzA4OGI1MWFlNjc1MjZlZDAyYTgwMWFkOWZhNmJjMmQ5MjFlNjcwOWM2YWY5NWFhMmIyYzAzZDY5OTFiNjg=",
+    "enableTranslation": false,
+    "testFrameworks": [
+      "gatling",
+      "cucumber"
+    ],
+    "jhiPrefix": "jhi",
+    "clientPackageManager": "npm",
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
