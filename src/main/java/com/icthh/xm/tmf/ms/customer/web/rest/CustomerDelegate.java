@@ -1,4 +1,4 @@
-package com.icthh.xm.tmf.ms.account.web.rest;
+package com.icthh.xm.tmf.ms.customer.web.rest;
 
 import com.icthh.xm.commons.lep.LogicExtensionPoint;
 import com.icthh.xm.commons.lep.spring.LepService;
@@ -17,7 +17,7 @@ import java.util.List;
 @LepService(group = "service", name = "default")
 public class CustomerDelegate implements CustomerApiDelegate {
 
-    @LogicExtensionPoint(value = "RetrievePartyAccount", resolver = ProfileKeyResolver.class)
+    @LogicExtensionPoint(value = "RetrieveCustomer", resolver = ProfileKeyResolver.class)
     @PreAuthorize("hasPermission({'id': #id}, 'CUSTOMER.GET')")
     @Override
     public ResponseEntity<List<Customer>> retrieveCustomer(String  id,
