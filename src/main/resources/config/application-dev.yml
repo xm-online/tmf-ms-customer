@@ -142,4 +142,10 @@ oauth2:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-# application:
+application:
+## ==================================================================
+##   uncomment to read LEPs from flocal file storage
+##   filestorage can be created as link to xm-sm-config-repository forlder using command:
+##   'ln -s <mw-ms-config-repository> ~/xm-online'
+##    lep:
+##        tenant-script-storage: FILE
