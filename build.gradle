@@ -272,7 +272,7 @@ dependencies {
     compile "org.postgresql:postgresql"
     provided "org.projectlombok:lombok:${lombok_version}"
     apt "org.projectlombok:lombok:${lombok_version}"
-    
+
     compile "com.icthh.xm.commons:xm-commons-security:${xm_commons_version}"
     compile "com.icthh.xm.commons:xm-commons-logging-web:${xm_commons_version}"
     compile "com.icthh.xm.commons:xm-commons-permission:${xm_commons_version}"
@@ -280,8 +280,7 @@ dependencies {
     compile "com.icthh.xm.commons:xm-commons-lep:${xm_commons_version}"
     compile "com.icthh.xm.commons:xm-commons-ms-web:${xm_commons_version}"
     compile "com.icthh.xm.commons:xm-commons-timeline:${xm_commons_version}"
-    
-    
+
     liquibaseRuntime "org.postgresql:postgresql"
     compile "org.mapstruct:mapstruct-jdk8:${mapstruct_version}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
