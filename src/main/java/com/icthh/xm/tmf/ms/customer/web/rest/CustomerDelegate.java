@@ -22,7 +22,8 @@ public class CustomerDelegate implements CustomerApiDelegate {
     @PreAuthorize("hasPermission({'id': #id}, 'CUSTOMER.GET')")
     @Override
     public ResponseEntity<List<Customer>> retrieveCustomer(String id,
-                                                           String profile) {
+                                                           String profile,
+                                                           String fields) {
         return ResponseEntity.ok(Collections.emptyList());
     }
 }

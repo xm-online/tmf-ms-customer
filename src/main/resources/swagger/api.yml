@@ -133,6 +133,11 @@ paths:
               in: query
               name: profile
               description: Profile
+            - type: string
+              required: false
+              in: query
+              name: fields
+              description: used to specify the attributes to be returned as part of a partial representation of a resource.
             responses:
                 '200':
                     description: Ok
