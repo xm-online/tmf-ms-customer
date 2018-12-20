@@ -39,47 +39,28 @@ spring:
                prefer-ip-address: true
             host: localhost
             port: 8500
-#    datasource:
-#        type: com.zaxxer.hikari.HikariDataSource
-#        url: jdbc:h2:mem:customer;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-#        username: customer
-#        password:
-#        hikari:
-#            auto-commit: false
-#    h2:
-#        console:
-#            enabled: false
-#    jpa:
-#        database-platform: io.github.jhipster.domain.util.FixedH2Dialect
-#        database: H2
-#        show-sql: true
-#        properties:
-#            hibernate.id.new_generator_mappings: true
-#            hibernate.connection.provider_disables_autocommit: true
-#            hibernate.cache.use_second_level_cache: false
-#            hibernate.cache.use_query_cache: false
-#            hibernate.generate_statistics: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:oracle:thin:@192.168.1.50:1521:xe
-        username: system
-        password: oracle
+        url: jdbc:h2:mem:customer;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+        username: customer
+        password:
         hikari:
             auto-commit: false
+    h2:
+        console:
+            enabled: false
     jpa:
-        database-platform: org.hibernate.dialect.Oracle12cDialect
-        database: ORACLE
-        show-sql: false
+        database-platform: io.github.jhipster.domain.util.FixedH2Dialect
+        database: H2
+        show-sql: true
         properties:
             hibernate.id.new_generator_mappings: true
             hibernate.connection.provider_disables_autocommit: true
             hibernate.cache.use_second_level_cache: false
             hibernate.cache.use_query_cache: false
-            hibernate.generate_statistics: false
-            db.schema.creation.enabled: false
+            hibernate.generate_statistics: true
     liquibase:
         contexts: dev
-        default-schema: XM_CUSTOMER
     mail:
         host: localhost
         port: 25
@@ -166,6 +147,5 @@ application:
 ##   uncomment to read LEPs from flocal file storage
 ##   filestorage can be created as link to xm-sm-config-repository forlder using command:
 ##   'ln -s <mw-ms-config-repository> ~/xm-online'
-    lep:
-        tenant-script-storage: FILE
-    db-schema-suffix: _customer
+##    lep:
+##        tenant-script-storage: FILE
