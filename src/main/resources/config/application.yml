@@ -80,6 +80,9 @@ spring:
             enabled: false
     thymeleaf:
         mode: HTML
+    liquibase:
+        default-schema: XM
+
 security:
     oauth2:
         resource:
@@ -145,6 +148,7 @@ application:
     lep:
         tenant-script-storage: XM_MS_CONFIG
         lep-resource-path-pattern: /config/tenants/{tenantName}/entity/lep/resources/**/*
+    db-schema-suffix:
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

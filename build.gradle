@@ -280,6 +280,7 @@ dependencies {
     compile "com.icthh.xm.commons:xm-commons-lep:${xm_commons_version}"
     compile "com.icthh.xm.commons:xm-commons-ms-web:${xm_commons_version}"
     compile "com.icthh.xm.commons:xm-commons-timeline:${xm_commons_version}"
+    compile "com.icthh.xm.commons:xm-commons-migration-db:${xm_commons_version}"
 
     liquibaseRuntime "org.postgresql:postgresql"
     compile "org.mapstruct:mapstruct-jdk8:${mapstruct_version}"
