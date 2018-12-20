@@ -36,11 +36,11 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Slf4j
+@RequiredArgsConstructor
 @Configuration
 @EnableJpaRepositories("com.icthh.xm.tmf.ms.customer.repository")
 @EnableJpaAuditing(auditorAwareRef = "springSecurityAuditorAware")
 @EnableTransactionManagement
-@RequiredArgsConstructor
 public class DatabaseConfiguration {
 
     private static final String JPA_PACKAGES = "com.icthh.xm.tmf.ms.customer.domain";
