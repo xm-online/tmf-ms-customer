@@ -1,5 +1,6 @@
 package com.icthh.xm.tmf.ms.customer.web.rest;
 
+import com.codahale.metrics.annotation.Timed;
 import com.icthh.xm.commons.lep.LogicExtensionPoint;
 import com.icthh.xm.commons.lep.spring.LepService;
 
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Component;
 @LepService(group = "service", name = "default")
 public class CustomerDelegate implements CustomerApiDelegate {
 
+    @Timed
     @LogicExtensionPoint(value = "RetrieveCustomer", resolver = ProfileKeyResolver.class)
     @PreAuthorize("hasPermission({'id': #id}, 'CUSTOMER.GET')")
     @Override
