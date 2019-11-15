@@ -2,7 +2,7 @@
 set -e
 if [ -d "/run/secrets" ]
 then
-    secrets=`ls /run/secrets/ 2>/dev/null |egrep -v '.*_FILE$'`
+    secrets=`find  /run/secrets/ -maxdepth 1 -type f ! -name "*FILE"  -exec basename {} \;`
     for s in $secrets
     do
         echo "set env $s"
@@ -27,4 +27,4 @@ if [ -n "${APPLICATION_EXTERNAL_CLASSPATH}" ]; then
 fi
 
 echo "The application will start in ${JHIPSTER_SLEEP}s..." && sleep ${JHIPSTER_SLEEP}
-exec java ${JAVA_OPTS} -Xmx$XMX -Djava.security.egd=file:/dev/./urandom -jar "app.war" "$@"
+exec java ${JAVA_OPTS} -Xmx$XMX -XX:+ExitOnOutOfMemoryError -Djava.security.egd=file:/dev/./urandom -jar "app.war" "$@"
