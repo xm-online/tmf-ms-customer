@@ -3,7 +3,7 @@
     "promptValues": {
       "packageName": "com.icthh.xm.tmf.ms.customer"
     },
-    "jhipsterVersion": "5.3.4",
+    "jhipsterVersion": "6.5.0",
     "applicationType": "microservice",
     "baseName": "customer",
     "packageName": "com.icthh.xm.tmf.ms.customer",
@@ -21,14 +21,19 @@
     "serviceDiscoveryType": "consul",
     "buildTool": "gradle",
     "enableSwaggerCodegen": false,
-    "jwtSecretKey": "NzQyZTVjMDZjM2E0YTUwZTA2MGYxOGVkYzU3MDJkZjMxMjM3N2QwYTAxNzJhYjMzOTY5ZGYxMjQ4NDg3ZDMyZThiYzA4OGI1MWFlNjc1MjZlZDAyYTgwMWFkOWZhNmJjMmQ5MjFlNjcwOWM2YWY5NWFhMmIyYzAzZDY5OTFiNjg=",
-    "enableTranslation": false,
+    "jwtSecretKey": "MWFkYWVlZjE2YmQ5OTI3MDhiZDYzZGYwNjM5N2JiMmJhYTg3OGVlMzlmMzNiMTI0MmUwMGVkMGY1Y2NkZDE2YzhlMTI2OGRmY2Y1ZmE2MmVhMzA2NzhhMDcwZTE4MzU5NWQzYTFlMWMyZTE3ZGEwNjg2Y2YzMjRhMTFiMmE1ZWI=",
+    "embeddableLaunchScript": false,
     "testFrameworks": [
       "gatling",
       "cucumber"
     ],
     "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
     "clientPackageManager": "npm",
+    "blueprints": [],
     "skipClient": true,
     "skipUserManagement": true
   }

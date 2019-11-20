@@ -6,7 +6,7 @@ import com.icthh.xm.commons.config.client.service.TenantConfigService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Set;
 
 import static org.mockito.Matchers.any;
@@ -17,11 +17,7 @@ import static org.mockito.Mockito.when;
 @Configuration
 public class TenantConfigMockConfiguration {
 
-    private Set<String> tenants = new HashSet<>();
-
-    {
-        tenants.add("XM");
-    }
+    private Set<String> tenants = Collections.singleton("XM");
 
     @Bean
     public TenantListRepository tenantListRepository() {

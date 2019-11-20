@@ -1,19 +1,11 @@
 package com.icthh.xm.tmf.ms.customer.config;
 
-import static com.icthh.xm.commons.migration.db.Constants.CHANGE_LOG_PATH;
-
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import com.icthh.xm.commons.migration.db.XmMultiTenantSpringLiquibase;
 import com.icthh.xm.commons.migration.db.XmSpringLiquibase;
 import com.icthh.xm.commons.migration.db.tenant.SchemaResolver;
 import io.github.jhipster.config.JHipsterConstants;
 import io.github.jhipster.config.h2.H2ConfigurationHelper;
-
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-import javax.sql.DataSource;
-
 import liquibase.integration.spring.MultiTenantSpringLiquibase;
 import liquibase.integration.spring.SpringLiquibase;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.MultiTenancyStrategy;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,9 +29,16 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.sql.DataSource;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.icthh.xm.commons.migration.db.Constants.CHANGE_LOG_PATH;
+
 @Slf4j
-@RequiredArgsConstructor
 @Configuration
+@RequiredArgsConstructor
 @EnableJpaRepositories("com.icthh.xm.tmf.ms.customer.repository")
 @EnableJpaAuditing(auditorAwareRef = "springSecurityAuditorAware")
 @EnableTransactionManagement
@@ -51,14 +52,29 @@ public class DatabaseConfiguration {
     /**
      * Open the TCP port for the H2 database, so it is available remotely.
      *
-     * @return the H2 database TCP server
-     * @throws SQLException if the server failed to start
+     * @return the H2 database TCP server.
+     * @throws SQLException if the server failed to start.
      */
     @Bean(initMethod = "start", destroyMethod = "stop")
     @Profile(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT)
     public Object h2TCPServer() throws SQLException {
-        log.debug("Starting H2 database");
-        return H2ConfigurationHelper.createServer();
+        String port = getValidPortForH2();
+        log.debug("H2 database is available on port {}", port);
+        return H2ConfigurationHelper.createServer(port);
+    }
+
+    private String getValidPortForH2() {
+        int port = Integer.parseInt(env.getProperty("server.port"));
+        if (port < 10000) {
+            port = 10000 + port;
+        } else {
+            if (port < 63536) {
+                port = port + 2000;
+            } else {
+                port = port - 2000;
+            }
+        }
+        return String.valueOf(port);
     }
 
     @Bean
