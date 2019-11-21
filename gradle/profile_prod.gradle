@@ -33,6 +33,11 @@ processResources {
             it.replace("#spring.profiles.active#", profiles)
         }
     }
+    filesMatching('**/logback-spring.xml') {
+        filter {
+            it.replace('#logback.loglevel#', "INFO")
+        }
+    }
 }
 
 generateGitProperties {

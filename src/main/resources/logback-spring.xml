@@ -12,14 +12,12 @@
 
     <logger name="com.icthh.xm" level="#logback.loglevel#"/>
     <logger name="io.github.jhipster" level="#logback.loglevel#"/>
-    <include resource="org/springframework/boot/logging/logback/base.xml"/>
-
     <logger name="javax.activation" level="WARN"/>
     <logger name="javax.mail" level="WARN"/>
     <logger name="javax.management.remote" level="WARN"/>
     <logger name="javax.xml.bind" level="WARN"/>
     <logger name="ch.qos.logback" level="WARN"/>
-
+    <logger name="com.codahale.metrics" level="WARN"/>
     <logger name="com.netflix" level="WARN"/>
     <logger name="com.netflix.config.sources.URLConfigurationSource" level="ERROR"/>
     <logger name="com.netflix.discovery" level="INFO"/>
