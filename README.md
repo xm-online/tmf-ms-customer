@@ -12,28 +12,33 @@ To start your application in the dev profile, simply run:
 
     ./gradlew
 
+
 For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
+
+### Doing API-First development using openapi-generator
+
+[OpenAPI-Generator]() is configured for this application. You can generate API code from the `src/main/resources/swagger/api.yml` definition file by running:
+```bash
+./gradlew openApiGenerate
+```
+Then implements the generated delegate classes with `@Service` classes.
+
+To edit the `api.yml` definition file, you can use a tool such as [Swagger-Editor](). Start a local instance of the swagger-editor using docker by running: `docker-compose -f src/main/docker/swagger-editor.yml up -d`. The editor will then be reachable at [http://localhost:7742](http://localhost:7742).
+
+Refer to [Doing API-First development][] for more details.
 
 ## Building for production
 
-### Packaging as jar
+To optimize the customer application for production, run:
 
-
-To build the final jar and optimize the customer application for production, run:
-
-    ./gradlew -Pprod clean bootJar
+    ./gradlew -Pprod clean bootWar
 
 To ensure everything worked, run:
 
-    java -jar build/libs/*.jar
+    java -jar build/libs/*.war
+
 
 Refer to [Using JHipster in production][] for more details.
-
-### Packaging as war
-
-To package your application as a war in order to deploy it to an application server, run:
-
-    ./gradlew -Pprod -Pwar clean bootWar
 
 ## Testing
 
@@ -76,7 +81,7 @@ To stop it and remove the container, run:
 You can also fully dockerize your application and all the services that it depends on.
 To achieve this, first build a docker image of your app by running:
 
-    ./gradlew bootJar -Pprod jibDockerBuild
+    ./gradlew bootWar -Pprod buildDocker
 
 Then run:
 
