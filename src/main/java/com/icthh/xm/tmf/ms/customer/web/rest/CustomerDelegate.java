@@ -19,7 +19,7 @@ public class CustomerDelegate implements CustomerApiDelegate {
 
     @Timed
     @LogicExtensionPoint(value = "RetrieveCustomer", resolver = ProfileKeyResolver.class)
-    //@PreAuthorize("hasPermission({'id': #id}, 'CUSTOMER.GET')")
+    @PreAuthorize("hasPermission({'id': #id}, 'CUSTOMER.GET')")
     @Override
     public ResponseEntity<List<Customer>> retrieveCustomer(String id,
                                                            String profile,
