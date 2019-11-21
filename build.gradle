@@ -220,11 +220,6 @@ liquibase {
     runList = project.ext.runList
 }
 
-checkstyle {
-    toolVersion '${checkstyle_version}'
-    configFile file("checkstyle.xml")
-    checkstyleTest.enabled = false
-}
 nohttp {
     source.include "build.gradle", "README.md"
 }
