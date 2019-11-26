@@ -7,11 +7,13 @@ import com.zaxxer.hikari.HikariDataSource;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 import io.prometheus.client.dropwizard.DropwizardExports;
 import javax.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
+@RequiredArgsConstructor
 @Configuration
 @EnableMetrics(proxyTargetClass = true)
 public class AppMetricsConfiguration extends MetricsConfigurerAdapter {
@@ -22,11 +24,6 @@ public class AppMetricsConfiguration extends MetricsConfigurerAdapter {
     private final PrometheusMeterRegistry prometheusMeterRegistry;
 
     private HikariDataSource hikariDataSource;
-
-    public AppMetricsConfiguration(MetricRegistry metricRegistry, PrometheusMeterRegistry prometheusMeterRegistry) {
-        this.metricRegistry = metricRegistry;
-        this.prometheusMeterRegistry = prometheusMeterRegistry;
-    }
 
     @Autowired(required = false)
     public void setHikariDataSource(HikariDataSource hikariDataSource) {
