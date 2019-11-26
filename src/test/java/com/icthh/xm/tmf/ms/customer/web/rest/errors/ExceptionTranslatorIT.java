@@ -2,12 +2,16 @@ package com.icthh.xm.tmf.ms.customer.web.rest.errors;
 
 import com.icthh.xm.tmf.ms.customer.CustomerApp;
 import com.icthh.xm.tmf.ms.customer.config.SecurityBeanOverrideConfiguration;
+import com.icthh.xm.tmf.ms.customer.config.TenantConfigMockConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -20,6 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests {@link ExceptionTranslator} controller advice.
  */
+@ContextConfiguration(classes = TenantConfigMockConfiguration.class)
 @SpringBootTest(classes = {SecurityBeanOverrideConfiguration.class, CustomerApp.class})
 public class ExceptionTranslatorIT {
 

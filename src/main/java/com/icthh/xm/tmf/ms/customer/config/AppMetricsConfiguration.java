@@ -11,17 +11,24 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 
-@RequiredArgsConstructor
 @Configuration
 @EnableMetrics(proxyTargetClass = true)
 public class AppMetricsConfiguration extends MetricsConfigurerAdapter {
 
     private final Logger log = LoggerFactory.getLogger(AppMetricsConfiguration.class);
 
+
     private final MetricRegistry metricRegistry;
     private final PrometheusMeterRegistry prometheusMeterRegistry;
+
+    public AppMetricsConfiguration(@Qualifier("getMetricRegistry") MetricRegistry metricRegistry,
+                                   PrometheusMeterRegistry prometheusMeterRegistry) {
+        this.metricRegistry = metricRegistry;
+        this.prometheusMeterRegistry = prometheusMeterRegistry;
+    }
 
     private HikariDataSource hikariDataSource;
 

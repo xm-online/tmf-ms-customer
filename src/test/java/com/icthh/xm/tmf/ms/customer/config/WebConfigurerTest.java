@@ -1,5 +1,6 @@
 package com.icthh.xm.tmf.ms.customer.config;
 
+import com.codahale.metrics.MetricRegistry;
 import io.github.jhipster.config.JHipsterConstants;
 import io.github.jhipster.config.JHipsterProperties;
 import org.h2.server.web.WebServlet;
@@ -35,6 +36,8 @@ public class WebConfigurerTest {
 
     private JHipsterProperties props;
 
+    private MetricRegistry metricRegistry;
+
     @BeforeEach
     public void setup() {
         servletContext = spy(new MockServletContext());
@@ -46,7 +49,7 @@ public class WebConfigurerTest {
         env = new MockEnvironment();
         props = new JHipsterProperties();
 
-        webConfigurer = new WebConfigurer(env, props);
+        webConfigurer = new WebConfigurer(env, props, metricRegistry);
     }
 
     @Test

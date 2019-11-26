@@ -15,6 +15,7 @@ import javax.servlet.ServletRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,11 +37,13 @@ public class WebConfigurer implements ServletContextInitializer {
 
     private final JHipsterProperties jHipsterProperties;
 
-    private MetricRegistry metricRegistry;
+    private final MetricRegistry metricRegistry;
 
-    public WebConfigurer(Environment env, JHipsterProperties jHipsterProperties) {
+    public WebConfigurer(Environment env, JHipsterProperties jHipsterProperties,
+        @Qualifier("getMetricRegistry") @Autowired(required = false) MetricRegistry metricRegistry) {
         this.env = env;
         this.jHipsterProperties = jHipsterProperties;
+        this.metricRegistry = metricRegistry;
     }
 
     @Override
@@ -104,8 +107,4 @@ public class WebConfigurer implements ServletContextInitializer {
         H2ConfigurationHelper.initH2Console(servletContext);
     }
 
-    @Autowired(required = false)
-    public void setMetricRegistry(MetricRegistry metricRegistry) {
-        this.metricRegistry = metricRegistry;
-    }
 }
