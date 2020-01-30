@@ -25,9 +25,9 @@ public class CustomerCharacteristics {
         @JsonProperty("defaultValue")
         private String defaultValue;
         @JsonProperty("min")
-        private Long min;
+        private Integer min;
         @JsonProperty("max")
-        private Long max;
+        private Integer max;
         @JsonProperty("predefinedValues")
         private List<String> predefinedValues;
     }

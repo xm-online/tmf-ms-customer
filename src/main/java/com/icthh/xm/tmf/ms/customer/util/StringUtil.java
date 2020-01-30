@@ -2,16 +2,19 @@ package com.icthh.xm.tmf.ms.customer.util;
 
 import lombok.experimental.UtilityClass;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.Collections.emptyList;
+import static java.util.Optional.ofNullable;
 
 @UtilityClass
 public class StringUtil {
 
     public static Collection<String> toStringList(String fields) {
-        return Stream.of(fields.split(",", -1))
-            .collect(toList());
+        return ofNullable(fields)
+            .map(f -> f.split(",", -1))
+            .map(Arrays::asList)
+            .orElse(emptyList());
     }
 }

@@ -25,7 +25,7 @@ public class CustomerCharacteristicEntity {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "customer_id")
     private Long customerId;
 
     @Column

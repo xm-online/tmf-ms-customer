@@ -18,10 +18,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.icthh.xm.tmf.ms.customer.util.StringUtil.toStringList;
 import static java.lang.Long.parseLong;
+import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toSet;
 
@@ -91,22 +91,31 @@ public class CustomerServiceImpl implements CustomerService {
 
     private void isCharacteristicValid(Characteristic characteristic) {
 
-        boolean hasRequestedKey = configCustomerService.getConfig().getCharacteristics().stream()
+        boolean configHasRequestedKey = configCustomerService.getConfig().getCharacteristics().stream()
             .map(CustomerCharacteristics.Characteristic::getKey)
             .anyMatch(key -> key.equals(characteristic.getName()));
 
-        AtomicBoolean fitPredefinedValues = new AtomicBoolean(true);
+        boolean fitConstraints = fitConstraints(characteristic);
 
-        configCustomerService.getConfig().getCharacteristics().stream()
-            .filter(propertyCharacteristic -> propertyCharacteristic.getKey().equals(characteristic.getName()))
-            .findAny()
-            .map(CustomerCharacteristics.Characteristic::getPredefinedValues)
-            .filter(predefinedValues -> predefinedValues.contains(characteristic.getValue()))
-            .ifPresent(values -> fitPredefinedValues.set(false));
-
-        if (!hasRequestedKey || !fitPredefinedValues.get())
+        if (!configHasRequestedKey || !fitConstraints)
             throw new IllegalArgumentException("Attribute is missing in property file : " + characteristic.getName());
 
+    }
+
+    private boolean fitConstraints(Characteristic characteristic) {
+        return configCustomerService.getConfig().getCharacteristics().stream()
+            .filter(config -> config.getKey().equals(characteristic.getName())).findAny()
+            .filter(predefinedValues -> predefinedValues.getDefaultValue().contains(characteristic.getValue()))
+            .filter(predefinedValues -> isFitLengthy(predefinedValues.getMax(), characteristic))
+            .filter(predefinedValues -> isFitLengthy(predefinedValues.getMin(), characteristic))
+            .isPresent();
+    }
+
+    private boolean isFitLengthy(Integer requiredLengthy, Characteristic characteristic) {
+        if (isNull(requiredLengthy))
+            return true;
+        else
+            return characteristic.getValue().length() == requiredLengthy;
     }
 
     private List<Customer> toCustomers(

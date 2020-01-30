@@ -26,7 +26,7 @@ public class ConfigCustomerService implements RefreshableConfiguration {
     private static final String TENANT_NAME = "tenantName";
 
     private ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-    private final ConcurrentHashMap<String, CustomerCharacteristics> loginProps = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, CustomerCharacteristics> customerProperties = new ConcurrentHashMap<>();
 
     private final AntPathMatcher matcher = new AntPathMatcher();
     private final ApplicationProperties applicationProperties;
@@ -35,12 +35,13 @@ public class ConfigCustomerService implements RefreshableConfiguration {
 
 
     public CustomerCharacteristics getConfig() {
+        log.info("Her is what we have inside propeties {}", customerProperties);
         String tenantKey = TenantContextUtils.getRequiredTenantKeyValue(tenantContextHolder);
         String cfgTenantKey = tenantKey.toUpperCase();
-        if (!loginProps.containsKey(cfgTenantKey)) {
+        if (!customerProperties.containsKey(cfgTenantKey)) {
             throw new IllegalArgumentException("Tenant user customer configuration not found");
         }
-        return loginProps.get(cfgTenantKey);
+        return customerProperties.get(cfgTenantKey);
     }
 
     @SneakyThrows
@@ -59,11 +60,11 @@ public class ConfigCustomerService implements RefreshableConfiguration {
         try {
             String tenant = matcher.extractUriTemplateVariables(pathPattern, key).get(TENANT_NAME);
             if (isBlank(config)) {
-                loginProps.remove(tenant);
+                customerProperties.remove(tenant);
                 log.info("Specification for tenant {} was removed", tenant);
             } else {
                 CustomerCharacteristics spec = mapper.readValue(config, CustomerCharacteristics.class);
-                loginProps.put(tenant, spec);
+                customerProperties.put(tenant, spec);
                 log.info("Specification for tenant {} was updated", tenant);
             }
         } catch (Exception e) {
