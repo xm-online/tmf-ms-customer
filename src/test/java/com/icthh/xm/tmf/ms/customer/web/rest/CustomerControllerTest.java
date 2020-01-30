@@ -62,7 +62,7 @@ public class CustomerControllerTest {
         httpMock.perform(patch("/api/customerManagement/v3/customer/1")
             .contentType(APPLICATION_JSON)
             .content(readAsString("customerUpdateWithNewCharacteristics.json")))
-            .andExpect(content().json(readAsString("expectedCustomerWithNewCharacteristic.json")))
+            .andExpect(content().json(readAsString("expectedCustomerWithNewCharacteristic.json"), false))
             .andExpect(status().isOk());
     }
 
@@ -72,7 +72,7 @@ public class CustomerControllerTest {
         httpMock.perform(patch("/api/customerManagement/v3/customer/2")
             .contentType(APPLICATION_JSON)
             .content(readAsString("customerUpdateWithDefaultCharacteristics.json")))
-            .andExpect(content().json(readAsString("expectedUpdatedCustomerWithDefaultCharacteristic.json")))
+            .andExpect(content().json(readAsString("expectedUpdatedCustomerWithDefaultCharacteristic.json"), false))
             .andExpect(status().isOk());
     }
 
@@ -81,7 +81,7 @@ public class CustomerControllerTest {
     public void shouldGetCustomerExistingCharacteristics() {
         httpMock.perform(get("/api/customerManagement/v3/customer/3")
             .contentType(APPLICATION_JSON))
-            .andExpect(content().json(readAsString("expectedCustomerWithExistingCharacteristic.json")))
+            .andExpect(content().json(readAsString("expectedCustomerWithExistingCharacteristic.json"), false))
             .andExpect(status().isOk());
     }
 
@@ -90,7 +90,7 @@ public class CustomerControllerTest {
     public void shouldGetCustomerDefaultCharacteristic() {
         httpMock.perform(get("/api/customerManagement/v3/customer/4")
             .contentType(APPLICATION_JSON))
-            .andExpect(content().json(readAsString("expectedCustomerWithDefaultCharacteristic.json")))
+            .andExpect(content().json(readAsString("expectedCustomerWithDefaultCharacteristic.json"), false))
             .andExpect(status().isOk());
     }
 

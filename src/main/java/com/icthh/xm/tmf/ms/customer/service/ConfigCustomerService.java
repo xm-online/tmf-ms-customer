@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.AntPathMatcher;
 
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static org.apache.commons.lang.StringUtils.isBlank;
@@ -24,18 +25,17 @@ import static org.apache.commons.lang.StringUtils.isBlank;
 public class ConfigCustomerService implements RefreshableConfiguration {
 
     private static final String TENANT_NAME = "tenantName";
-
-    private ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-    private final ConcurrentHashMap<String, CustomerCharacteristics> customerProperties = new ConcurrentHashMap<>();
+    private final Map<String, CustomerCharacteristics> customerProperties = new ConcurrentHashMap<>();
 
     private final AntPathMatcher matcher = new AntPathMatcher();
+    private final ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+
+    private final TenantContextHolder tenantContextHolder;
     private final ApplicationProperties applicationProperties;
     private final TenantConfigRepository tenantConfigRepository;
-    private final TenantContextHolder tenantContextHolder;
 
 
     public CustomerCharacteristics getConfig() {
-        log.info("Her is what we have inside propeties {}", customerProperties);
         String tenantKey = TenantContextUtils.getRequiredTenantKeyValue(tenantContextHolder);
         String cfgTenantKey = tenantKey.toUpperCase();
         if (!customerProperties.containsKey(cfgTenantKey)) {

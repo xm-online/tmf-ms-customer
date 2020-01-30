@@ -49,6 +49,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         customerUpdate.getCharacteristic()
             .forEach(characteristic -> updateCharacteristic(id, characteristic, customer));
+
         return customer;
     }
 
@@ -119,10 +120,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private List<Customer> toCustomers(
-        Collection<String> requestedFields, Collection<CustomerCharacteristicEntity> characteristicEntities
+        Collection<String> requestedFields, Collection<CustomerCharacteristicEntity> foundFields
     ) {
         Collection<CustomerCharacteristicEntity> withDefaultValues =
-            fillDefaultValues(requestedFields, characteristicEntities);
+            fillDefaultValues(requestedFields, foundFields);
 
         List<Customer> customers = new ArrayList<>();
 
@@ -160,8 +161,8 @@ public class CustomerServiceImpl implements CustomerService {
         Collection<CustomerCharacteristicEntity> characteristicEntities, String requestedField
     ) {
         ofNullable(getDefaultValue(requestedField))
-            .ifPresent(defaultValue ->
-                characteristicEntities.add(mapper.toNewCharacteristic(requestedField, defaultValue))
+            .ifPresent(
+                defaultValue -> characteristicEntities.add(mapper.toNewCharacteristic(requestedField, defaultValue))
             );
     }
 

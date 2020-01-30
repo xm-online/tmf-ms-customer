@@ -30,19 +30,16 @@ public class CustomerDelegate implements CustomerApiDelegate {
     @Timed
     @Override
     @LogicExtensionPoint(value = "RetrieveCustomer", resolver = ProfileKeyResolver.class)
-//    @PreAuthorize("hasPermission({'id': #id}, 'CUSTOMER.GET')")
-//    @PrivilegeDescription("Privilege to get a customer")
+    @PreAuthorize("hasPermission({'id': #id}, 'CUSTOMER.GET')")
+    @PrivilegeDescription("Privilege to get a customer")
     public ResponseEntity<List<Customer>> retrieveCustomer(String id,
                                                            String profile,
                                                            String fields) {
-        log.info("Try to get customer with database implemntation Hello ");
         return ok(customerService.getCustomer(id, profile, fields));
     }
 
-
     @Timed
     @Override
-    @LogicExtensionPoint(value = "PatchCustomer", resolver = ProfileKeyResolver.class)
     @PreAuthorize("hasPermission({'id': #id}, 'CUSTOMER.PATCH')")
     @PrivilegeDescription("Privilege to patch a customer")
     public ResponseEntity<Customer> patchCustomer(String id, CustomerUpdate customer) {
