@@ -22,7 +22,7 @@ public class CustomerCharacteristics {
 
         @JsonProperty("key")
         private String key;
-        @JsonProperty("default")
+        @JsonProperty("defaultValue")
         private String defaultValue;
         @JsonProperty("min")
         private Long min;
