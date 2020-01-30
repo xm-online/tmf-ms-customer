@@ -703,6 +703,9 @@ definitions:
             value:
                 type: string
                 description: The value of the characteristic provided as a string.
+            default:
+                type: boolean
+                description: Shows wheather the charateristic value is default or not.
     CreditProfile:
         type: object
         description: Credit profile for the party (containing credit scoring, ...). By

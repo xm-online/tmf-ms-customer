@@ -1,4 +1,4 @@
-package com.icthh.xm.tmf.ms.customer.client;
+package com.icthh.xm.tmf.ms.customer.config.faign;
 
 import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequestInterceptor;
 import org.springframework.context.annotation.Bean;

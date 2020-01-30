@@ -1,5 +1,6 @@
 package com.icthh.xm.tmf.ms.customer.security;
 
+import lombok.experimental.UtilityClass;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -12,10 +13,8 @@ import java.util.stream.Stream;
 /**
  * Utility class for Spring Security.
  */
-public final class SecurityUtils {
-
-    private SecurityUtils() {
-    }
+@UtilityClass
+public class SecurityUtils {
 
     /**
      * Get the login of the current user.

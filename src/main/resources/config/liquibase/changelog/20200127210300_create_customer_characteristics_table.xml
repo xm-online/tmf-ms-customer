@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20200127210300" author="amostipan">
+        <createTable tableName="customer_characteristic">
+
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="customer_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="key" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="value" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20200127210400" author="amostipan">
+        <createIndex tableName="customer_characteristic" indexName="idx_customer_characteristic_customer_id">
+            <column name="customer_id" />
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="20200127210500" author="amostipan">
+        <addUniqueConstraint
+            columnNames="customer_id, key"
+            constraintName="unique_customer_id_key_constraint"
+            tableName="customer_characteristic"
+        />
+    </changeSet>
+</databaseChangeLog>

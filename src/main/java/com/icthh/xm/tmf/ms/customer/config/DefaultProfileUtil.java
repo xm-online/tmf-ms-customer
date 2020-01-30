@@ -2,6 +2,7 @@ package com.icthh.xm.tmf.ms.customer.config;
 
 import io.github.jhipster.config.JHipsterConstants;
 
+import lombok.experimental.UtilityClass;
 import org.springframework.boot.SpringApplication;
 
 import java.util.*;
@@ -11,12 +12,10 @@ import java.util.*;
  * when there is no {@code spring.profiles.active} set in the environment or as command line argument.
  * If the value is not available in {@code application.yml} then {@code dev} profile will be used as default.
  */
-public final class DefaultProfileUtil {
+@UtilityClass
+public class DefaultProfileUtil {
 
     private static final String SPRING_PROFILE_DEFAULT = "spring.profiles.default";
-
-    private DefaultProfileUtil() {
-    }
 
     /**
      * Set a default to use when no profile is configured.

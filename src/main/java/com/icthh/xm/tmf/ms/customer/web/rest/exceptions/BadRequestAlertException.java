@@ -1,5 +1,6 @@
-package com.icthh.xm.tmf.ms.customer.web.rest.errors;
+package com.icthh.xm.tmf.ms.customer.web.rest.exceptions;
 
+import lombok.Getter;
 import org.zalando.problem.AbstractThrowableProblem;
 import org.zalando.problem.Status;
 
@@ -7,6 +8,7 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
+@Getter
 public class BadRequestAlertException extends AbstractThrowableProblem {
 
     private static final long serialVersionUID = 1L;
@@ -23,14 +25,6 @@ public class BadRequestAlertException extends AbstractThrowableProblem {
         super(type, defaultMessage, Status.BAD_REQUEST, null, null, null, getAlertParameters(entityName, errorKey));
         this.entityName = entityName;
         this.errorKey = errorKey;
-    }
-
-    public String getEntityName() {
-        return entityName;
-    }
-
-    public String getErrorKey() {
-        return errorKey;
     }
 
     private static Map<String, Object> getAlertParameters(String entityName, String errorKey) {

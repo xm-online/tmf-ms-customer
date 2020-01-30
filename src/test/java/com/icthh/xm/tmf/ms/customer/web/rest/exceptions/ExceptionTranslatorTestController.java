@@ -1,4 +1,4 @@
-package com.icthh.xm.tmf.ms.customer.web.rest.errors;
+package com.icthh.xm.tmf.ms.customer.web.rest.exceptions;
 
 import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.http.HttpStatus;

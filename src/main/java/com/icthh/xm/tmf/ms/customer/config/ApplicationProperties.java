@@ -29,6 +29,9 @@ public class ApplicationProperties {
 
     private List<String> tenantIgnoredPathList = Collections.emptyList();
 
+    private String tenantCustomerPropertiesPathPattern;
+    private String tenantCustomerPropertiesName;
+
     @Getter
     @Setter
     public static class Lep {

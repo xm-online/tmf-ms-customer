@@ -1,5 +1,9 @@
 package com.icthh.xm.tmf.ms.customer;
 
+import com.icthh.xm.commons.logging.util.MdcUtils;
+import com.icthh.xm.commons.tenant.TenantContextUtils;
+import com.icthh.xm.commons.tenant.TenantKey;
+import com.icthh.xm.commons.tenant.internal.DefaultTenantContextHolder;
 import com.icthh.xm.tmf.ms.customer.config.ApplicationProperties;
 import com.icthh.xm.tmf.ms.customer.config.DefaultProfileUtil;
 import io.github.jhipster.config.JHipsterConstants;
@@ -18,6 +22,9 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
+
+import static com.icthh.xm.commons.tenant.TenantKey.SUPER_TENANT_KEY_VALUE;
+
 @SpringBootApplication(scanBasePackages = { "com.icthh.xm", "com.icthh.xm.tmf.ms.customer" })
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
 @EnableDiscoveryClient
@@ -49,7 +56,20 @@ public class CustomerApp implements InitializingBean {
             log.error("You have misconfigured your application! It should not " +
                 "run with both the 'dev' and 'cloud' profiles at the same time.");
         }
+
+        initContexts();
     }
+
+    private static void initContexts() {
+        // init tenant context, by default this is XM super tenant
+        // TODO fix tenantKey upper case usage only for for Config server calls..., Postgres, H2 schema case sensitivity
+        TenantKey superKey = TenantKey.valueOf(SUPER_TENANT_KEY_VALUE.toUpperCase());
+        TenantContextUtils.setTenant(new DefaultTenantContextHolder(), superKey);
+
+        // init logger MDC context
+        MdcUtils.putRid(MdcUtils.getRid() + "::" + superKey.getValue());
+    }
+
 
     /**
      * Main method, used to run the application.

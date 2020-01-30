@@ -6,7 +6,7 @@ import lombok.experimental.UtilityClass;
  * Application constants.
  */
 @UtilityClass
-public final class Constants {
+public class Constants {
 
     // Regex for acceptable logins
     public static final String LOGIN_REGEX = "^[_.@A-Za-z0-9-]*$";

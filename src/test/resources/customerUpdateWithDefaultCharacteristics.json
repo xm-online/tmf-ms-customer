@@ -1,0 +1,9 @@
+{
+  "characteristic": [
+    {
+      "key": "language",
+      "value": "1231231",
+      "default": true
+    }
+  ]
+}

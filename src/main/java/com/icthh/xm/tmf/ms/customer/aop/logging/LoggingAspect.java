@@ -52,7 +52,7 @@ public class LoggingAspect {
     }
 
     /**
-     * Advice that logs methods throwing exceptions.
+     * Advice that logs methods throwing exception.
      *
      * @param joinPoint join point for advice.
      * @param e exception.

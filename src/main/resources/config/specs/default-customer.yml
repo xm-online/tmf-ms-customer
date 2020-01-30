@@ -1,0 +1,17 @@
+---
+characteristics:
+    - key: firebase_id
+      defaultValue:
+      max:
+      min:
+      predefinedValues:
+    - key: lenguage
+      defaultValue: ua
+      max:
+      min:
+      predefinedValues:
+        - ua
+        - ru
+        - en
+
+

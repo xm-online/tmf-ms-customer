@@ -1,15 +1,16 @@
 package com.icthh.xm.tmf.ms.customer.client;
 
+import com.icthh.xm.tmf.ms.customer.config.faign.OAuth2InterceptedFeignConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.FeignClientsConfiguration;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
 @Documented
 @FeignClient
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
 public @interface AuthorizedFeignClient {
 
     @AliasFor(annotation = FeignClient.class, attribute = "name")

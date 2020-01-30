@@ -1,15 +1,21 @@
 package com.icthh.xm.tmf.ms.customer.client;
 
-import java.lang.annotation.*;
-
+import com.icthh.xm.tmf.ms.customer.config.faign.OAuth2UserClientFeignConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.FeignClientsConfiguration;
 import org.springframework.core.annotation.AliasFor;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 @Documented
 @FeignClient
+@Target(TYPE)
+@Retention(RUNTIME)
 public @interface AuthorizedUserFeignClient {
 
     @AliasFor(annotation = FeignClient.class, attribute = "name")
