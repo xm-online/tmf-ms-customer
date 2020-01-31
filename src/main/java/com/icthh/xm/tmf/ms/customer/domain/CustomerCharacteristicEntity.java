@@ -9,9 +9,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Data
 @Entity
@@ -22,7 +23,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class CustomerCharacteristicEntity {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     @Column(name = "customer_id")
@@ -30,6 +32,7 @@ public class CustomerCharacteristicEntity {
 
     @Column
     private String key;
+
     @Column
     private String value;
 }
