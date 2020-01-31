@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 @Data
@@ -17,17 +18,29 @@ public class CustomerCharacteristics {
 
     @Data
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonPropertyOrder({"key", "defaultValue", "max", "min", "predefinedValues"})
+    @JsonPropertyOrder({"key", "defaultValue", "regexp", "max", "min", "predefinedValues"})
     public static class Characteristic {
 
         @JsonProperty("key")
         private String key;
+
+        @Nullable
         @JsonProperty("defaultValue")
         private String defaultValue;
+
+        @Nullable
+        @JsonProperty("regexp")
+        private String regexp;
+
+        @Nullable
         @JsonProperty("min")
         private Integer min;
+
+        @Nullable
         @JsonProperty("max")
         private Integer max;
+
+        @Nullable
         @JsonProperty("predefinedValues")
         private List<String> predefinedValues;
     }

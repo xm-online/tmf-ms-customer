@@ -114,9 +114,17 @@ public class CustomerServiceImpl implements CustomerService {
         return configCustomerService.getConfig().getCharacteristics().stream()
             .filter(config -> config.getKey().equals(characteristic.getName())).findAny()
             .filter(predefined -> isInPredefinedValues(predefined.getPredefinedValues(), characteristic.getValue()))
+            .filter(predefined -> isFitRegExp(predefined.getRegexp(), characteristic.getValue()))
             .filter(predefined -> isFitLengthy(predefined.getMax(), characteristic.getValue()))
             .filter(predefined -> isFitLengthy(predefined.getMin(), characteristic.getValue()))
             .isPresent();
+    }
+
+    private boolean isFitRegExp(String regexp, String value) {
+        if (isNull(regexp))
+            return true;
+        else
+            return value.matches(regexp);
     }
 
     private boolean isInPredefinedValues(List<String> predefinedValues, String characteristicValue) {
