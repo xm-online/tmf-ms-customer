@@ -142,7 +142,7 @@ public class CustomerServiceImpl implements CustomerService {
         if (isNull(requiredLengthy))
             return true;
         else
-            return characteristic.length() == requiredLengthy;
+            return characteristic.length() <= requiredLengthy;
     }
 
     private List<Customer> toCustomers(
