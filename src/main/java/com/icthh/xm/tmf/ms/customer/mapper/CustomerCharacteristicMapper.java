@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.List;
 
+import static java.lang.Long.parseLong;
 import static java.util.stream.Collectors.toList;
 
 @Component
@@ -34,7 +35,7 @@ public class CustomerCharacteristicMapper {
 
     public CustomerCharacteristicEntity toAttribute(String id, Characteristic characteristic) {
         return CustomerCharacteristicEntity.builder()
-            .customerId(Long.valueOf(id))
+            .customerId(parseLong(id))
             .key(characteristic.getName())
             .value(characteristic.getValue())
             .build();

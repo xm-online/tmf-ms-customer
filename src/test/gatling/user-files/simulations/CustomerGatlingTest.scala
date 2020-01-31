@@ -72,7 +72,7 @@ class CustomerGatlingTest extends Simulation {
                 .exec(http("Update customer attribute")
                     .patch("/api/customerManagement/v3/customer/1")
                     .headers(headers_http_authenticated)
-                    .body(StringBody("""{"characteristic": [{"key": "language","value": "uk","default": true}]}""")).asJson
+                    .body(StringBody("""{"characteristic": [{"name": "language","value": "uk","default": true}]}""")).asJson
                     .check(status.is(200)))
                 .pause(10)
                 .repeat(5) {

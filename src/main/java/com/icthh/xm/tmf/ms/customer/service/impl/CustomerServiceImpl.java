@@ -67,7 +67,7 @@ public class CustomerServiceImpl implements CustomerService {
             customer.addCharacteristicItem(characteristic);
 
         } catch (Exception ex) {
-            log.error("Could not update characteristic : " + ex.getMessage());
+            log.error("Could not update characteristic : " + ex.getMessage(), ex);
         }
     }
 
@@ -106,17 +106,28 @@ public class CustomerServiceImpl implements CustomerService {
     private boolean fitConstraints(Characteristic characteristic) {
         return configCustomerService.getConfig().getCharacteristics().stream()
             .filter(config -> config.getKey().equals(characteristic.getName())).findAny()
-            .filter(predefinedValues -> predefinedValues.getDefaultValue().contains(characteristic.getValue()))
-            .filter(predefinedValues -> isFitLengthy(predefinedValues.getMax(), characteristic))
-            .filter(predefinedValues -> isFitLengthy(predefinedValues.getMin(), characteristic))
+            .filter(predefined -> isInPredefinedValues(predefined.getPredefinedValues(), characteristic.getValue()))
+            .filter(predefined -> isFitLengthy(predefined.getMax(), characteristic.getValue()))
+            .filter(predefined -> isFitLengthy(predefined.getMin(), characteristic.getValue()))
             .isPresent();
     }
 
-    private boolean isFitLengthy(Integer requiredLengthy, Characteristic characteristic) {
+    private boolean isInPredefinedValues(List<String> predefinedValues, String characteristicValue) {
+        log.info("Predefined values {} and characteristic value {} ", predefinedValues, characteristicValue);
+
+        if (isNull(predefinedValues) || predefinedValues.isEmpty())
+            return true;
+
+        return predefinedValues.contains(characteristicValue);
+    }
+
+    private boolean isFitLengthy(Integer requiredLengthy, String characteristic) {
+        log.info("Required lengthy {} characteristic {} ", requiredLengthy, characteristic);
+
         if (isNull(requiredLengthy))
             return true;
         else
-            return characteristic.getValue().length() == requiredLengthy;
+            return characteristic.length() == requiredLengthy;
     }
 
     private List<Customer> toCustomers(

@@ -1,10 +1,8 @@
-[
-  {
-    "characteristic": [
-      {
-        "key": "language",
-        "value": "ua"
-      }
-    ]
-  }
-]
+{
+  "characteristic": [
+    {
+      "key": "language",
+      "value": "ua"
+    }
+  ]
+}

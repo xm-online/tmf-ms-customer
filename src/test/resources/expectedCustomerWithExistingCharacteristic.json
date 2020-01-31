@@ -2,7 +2,7 @@
   {
     "characteristic": [
       {
-        "key": "language",
+        "name": "language",
         "value": "en"
       }
     ]
