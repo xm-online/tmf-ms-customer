@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.CheckForNull;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -58,7 +59,7 @@ public class CustomerServiceImpl implements CustomerService {
 
             isCharacteristicValid(characteristic);
 
-            if (characteristic.getDefault())
+            if (isDefaultValue(characteristic.getDefault()))
                 customerEntityRepository.findById(Long.parseLong(id))
                     .ifPresent(customerEntityRepository::delete);
             else
@@ -69,6 +70,12 @@ public class CustomerServiceImpl implements CustomerService {
         } catch (Exception ex) {
             log.error("Could not update characteristic : " + ex.getMessage(), ex);
         }
+    }
+
+    private boolean isDefaultValue(@CheckForNull Boolean defaultFlag) {
+        return ofNullable(defaultFlag)
+            .filter(isDefault -> isDefault.equals(true))
+            .isPresent();
     }
 
     @Transactional
