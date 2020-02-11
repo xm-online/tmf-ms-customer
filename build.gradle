@@ -360,3 +360,9 @@ task stage(dependsOn: 'bootWar') {
 
 compileJava.dependsOn processResources
 processResources.dependsOn bootBuildInfo
+
+task getProjectVersion {
+    doLast {
+        println project.version
+    }
+}
