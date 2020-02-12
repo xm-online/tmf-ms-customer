@@ -99,7 +99,7 @@ if (OperatingSystem.current().isWindows()) {
 }
 
 bootWar {
-    mainClassName = 'com.icthh.xm.tmf.ms.qualification.QualificationApp'
+    mainClassName = 'com.icthh.xm.tmf.ms.customer.CustomerApp'
     manifest {
         attributes(
                 "Implementation-Version": archiveVersion
