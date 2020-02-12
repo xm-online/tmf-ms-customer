@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class ExceptionTranslatorTestController {
@@ -19,6 +21,19 @@ public class ExceptionTranslatorTestController {
 
     @PostMapping("/test/method-argument")
     public void methodArgument(@Valid @RequestBody TestDTO testDTO) {
+    }
+
+    @GetMapping("/test/parameterized-error")
+    public void parameterizedError() {
+        throw new CustomParameterizedException("test parameterized error", "param0_value", "param1_value");
+    }
+
+    @GetMapping("/test/parameterized-error2")
+    public void parameterizedError2() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("foo", "foo_value");
+        params.put("bar", "bar_value");
+        throw new CustomParameterizedException("test parameterized error", params);
     }
 
     @GetMapping("/test/missing-servlet-request-part")
@@ -40,7 +55,7 @@ public class ExceptionTranslatorTestController {
     }
 
     @GetMapping("/test/response-status")
-    public void exceptionWithResponseStatus() {
+    public void exceptionWithReponseStatus() {
         throw new TestResponseStatusException();
     }
 

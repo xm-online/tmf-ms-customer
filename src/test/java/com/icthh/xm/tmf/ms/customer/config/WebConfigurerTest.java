@@ -1,20 +1,32 @@
 package com.icthh.xm.tmf.ms.customer.config;
 
 import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.servlet.InstrumentedFilter;
+import com.codahale.metrics.servlets.MetricsServlet;
 import io.github.jhipster.config.JHipsterConstants;
 import io.github.jhipster.config.JHipsterProperties;
+import io.undertow.Undertow;
+import io.undertow.Undertow.Builder;
+import io.undertow.UndertowOptions;
+
 import org.h2.server.web.WebServlet;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.mock.env.MockEnvironment;
 import org.springframework.mock.web.MockServletContext;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.xnio.OptionMap;
 
 import javax.servlet.*;
 import java.util.*;
 
+import static java.lang.Boolean.TRUE;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -24,7 +36,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Unit tests for the {@link WebConfigurer} class.
+ * Unit tests for the WebConfigurer class.
+ *
+ * @see WebConfigurer
  */
 public class WebConfigurerTest {
 
@@ -38,7 +52,9 @@ public class WebConfigurerTest {
 
     private MetricRegistry metricRegistry;
 
-    @BeforeEach
+    private ServerProperties serverProperties;
+
+    @Before
     public void setup() {
         servletContext = spy(new MockServletContext());
         doReturn(mock(FilterRegistration.Dynamic.class))
@@ -48,8 +64,11 @@ public class WebConfigurerTest {
 
         env = new MockEnvironment();
         props = new JHipsterProperties();
+        serverProperties = new ServerProperties();
 
-        webConfigurer = new WebConfigurer(env, props, metricRegistry);
+        webConfigurer = new WebConfigurer(env, props, serverProperties);
+        metricRegistry = new MetricRegistry();
+        webConfigurer.setMetricRegistry(metricRegistry);
     }
 
     @Test
@@ -57,6 +76,10 @@ public class WebConfigurerTest {
         env.setActiveProfiles(JHipsterConstants.SPRING_PROFILE_PRODUCTION);
         webConfigurer.onStartup(servletContext);
 
+        assertThat(servletContext.getAttribute(InstrumentedFilter.REGISTRY_ATTRIBUTE)).isEqualTo(metricRegistry);
+        assertThat(servletContext.getAttribute(MetricsServlet.METRICS_REGISTRY)).isEqualTo(metricRegistry);
+        verify(servletContext).addFilter(eq("webappMetricsFilter"), any(InstrumentedFilter.class));
+        verify(servletContext).addServlet(eq("metricsServlet"), any(MetricsServlet.class));
         verify(servletContext, never()).addServlet(eq("H2Console"), any(WebServlet.class));
     }
 
@@ -65,7 +88,37 @@ public class WebConfigurerTest {
         env.setActiveProfiles(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT);
         webConfigurer.onStartup(servletContext);
 
+        assertThat(servletContext.getAttribute(InstrumentedFilter.REGISTRY_ATTRIBUTE)).isEqualTo(metricRegistry);
+        assertThat(servletContext.getAttribute(MetricsServlet.METRICS_REGISTRY)).isEqualTo(metricRegistry);
+        verify(servletContext).addFilter(eq("webappMetricsFilter"), any(InstrumentedFilter.class));
+        verify(servletContext).addServlet(eq("metricsServlet"), any(MetricsServlet.class));
         verify(servletContext).addServlet(eq("H2Console"), any(WebServlet.class));
+    }
+
+    @Test
+    public void testCustomizeServletContainer() {
+        env.setActiveProfiles(JHipsterConstants.SPRING_PROFILE_PRODUCTION);
+        UndertowServletWebServerFactory container = new UndertowServletWebServerFactory();
+        webConfigurer.customize(container);
+        assertThat(container.getMimeMappings().get("abs")).isEqualTo("audio/x-mpeg");
+        assertThat(container.getMimeMappings().get("html")).isEqualTo("text/html;charset=utf-8");
+        assertThat(container.getMimeMappings().get("json")).isEqualTo("text/html;charset=utf-8");
+
+        Builder builder = Undertow.builder();
+        container.getBuilderCustomizers().forEach(c -> c.customize(builder));
+        OptionMap.Builder serverOptions = (OptionMap.Builder) ReflectionTestUtils.getField(builder, "serverOptions");
+        assertThat(serverOptions.getMap().get(UndertowOptions.ENABLE_HTTP2)).isNull();
+    }
+
+    @Test
+    public void testUndertowHttp2Enabled() {
+        serverProperties.getHttp2().setEnabled(TRUE);
+        UndertowServletWebServerFactory container = new UndertowServletWebServerFactory();
+        webConfigurer.customize(container);
+        Builder builder = Undertow.builder();
+        container.getBuilderCustomizers().forEach(c -> c.customize(builder));
+        OptionMap.Builder serverOptions = (OptionMap.Builder) ReflectionTestUtils.getField(builder, "serverOptions");
+        assertThat(serverOptions.getMap().get(UndertowOptions.ENABLE_HTTP2)).isTrue();
     }
 
     @Test

@@ -1,4 +1,4 @@
-package com.icthh.xm.tmf.ms.customer.config;
+package com.icthh.xm.tmf.ms.customer.config.tenant;
 
 import com.icthh.xm.commons.config.client.repository.TenantConfigRepository;
 import org.mockito.Mockito;
@@ -14,8 +14,9 @@ public class WebappTenantOverrideConfiguration {
     public TenantConfigRepository webappTenantConfigRepository() {
         TenantConfigRepository repository = Mockito.mock(TenantConfigRepository.class);
         Mockito.doNothing().when(repository).updateConfig(Mockito.anyString(),
-            Mockito.anyString(),
-            Mockito.anyString());
+                                                          Mockito.anyString(),
+                                                          Mockito.anyString());
         return repository;
     }
+
 }

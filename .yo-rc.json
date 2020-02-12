@@ -3,7 +3,7 @@
     "promptValues": {
       "packageName": "com.icthh.xm.tmf.ms.customer"
     },
-    "jhipsterVersion": "6.5.0",
+    "jhipsterVersion": "6.5.1",
     "applicationType": "microservice",
     "baseName": "customer",
     "packageName": "com.icthh.xm.tmf.ms.customer",
@@ -20,13 +20,10 @@
     "messageBroker": false,
     "serviceDiscoveryType": "consul",
     "buildTool": "gradle",
-    "enableSwaggerCodegen": false,
-    "jwtSecretKey": "MWFkYWVlZjE2YmQ5OTI3MDhiZDYzZGYwNjM5N2JiMmJhYTg3OGVlMzlmMzNiMTI0MmUwMGVkMGY1Y2NkZDE2YzhlMTI2OGRmY2Y1ZmE2MmVhMzA2NzhhMDcwZTE4MzU5NWQzYTFlMWMyZTE3ZGEwNjg2Y2YzMjRhMTFiMmE1ZWI=",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "NGYwOWRkOTFmNTRiZDhmMTU5YTRiMzc5ZDQ0NmJlNTczMWUwNDI1MzQyNDM0MjQxMmUzYTUxZGU0ZDNiZGY1YTZjNDA5NTI5YzEwNjE4MDc2MDE0YjQ5NGYzMzA1OTE3NDYxODhkNzMyMTM4ZjZhNTRkOWY3ZjBlNDdlMzA2ZGU=",
     "embeddableLaunchScript": false,
-    "testFrameworks": [
-      "gatling",
-      "cucumber"
-    ],
+    "testFrameworks": [],
     "jhiPrefix": "jhi",
     "entitySuffix": "",
     "dtoSuffix": "DTO",

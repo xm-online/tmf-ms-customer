@@ -1,6 +1,8 @@
+[![Build Status](https://travis-ci.org/xm-online/tmf-ms-customer.svg?branch=master)](https://travis-ci.org/xm-online/tmf-ms-customer) [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?&metric=sqale_index&branch=master&project=xm-online:tmf-ms-customer)](https://sonarcloud.io/dashboard/index/xm-online:tmf-ms-customer) [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?&metric=ncloc&branch=master&project=xm-online:tmf-ms-customer)](https://sonarcloud.io/dashboard/index/xm-online:tmf-ms-customer) [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?&metric=coverage&branch=master&project=xm-online:tmf-ms-customer)](https://sonarcloud.io/dashboard/index/xm-online:tmf-ms-customer)
+
 # customer
 
-This application was generated using JHipster 6.5.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.5.0](https://www.jhipster.tech/documentation-archive/v6.5.0).
+This application was generated using JHipster 6.5.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.5.1](https://www.jhipster.tech/documentation-archive/v6.5.1).
 
 This is a "microservice" application intended to be part of a microservice architecture, please refer to the [Doing microservices with JHipster][] page of the documentation for more information.
 
@@ -12,15 +14,16 @@ To start your application in the dev profile, simply run:
 
     ./gradlew
 
-
 For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
 
 ### Doing API-First development using openapi-generator
 
 [OpenAPI-Generator]() is configured for this application. You can generate API code from the `src/main/resources/swagger/api.yml` definition file by running:
+
 ```bash
 ./gradlew openApiGenerate
 ```
+
 Then implements the generated delegate classes with `@Service` classes.
 
 To edit the `api.yml` definition file, you can use a tool such as [Swagger-Editor](). Start a local instance of the swagger-editor using docker by running: `docker-compose -f src/main/docker/swagger-editor.yml up -d`. The editor will then be reachable at [http://localhost:7742](http://localhost:7742).
@@ -29,27 +32,29 @@ Refer to [Doing API-First development][] for more details.
 
 ## Building for production
 
-To optimize the customer application for production, run:
+### Packaging as jar
 
-    ./gradlew -Pprod clean bootWar
+To build the final jar and optimize the customer application for production, run:
+
+    ./gradlew -Pprod clean bootJar
 
 To ensure everything worked, run:
 
-    java -jar build/libs/*.war
-
+    java -jar build/libs/*.jar
 
 Refer to [Using JHipster in production][] for more details.
+
+### Packaging as war
+
+To package your application as a war in order to deploy it to an application server, run:
+
+    ./gradlew -Pprod -Pwar clean bootWar
 
 ## Testing
 
 To launch your application's tests, run:
 
-    ./gradlew test
-### Other tests
-
-Performance tests are run by [Gatling][] and written in Scala. They're located in [src/test/gatling](src/test/gatling).
-
-To use those tests, you must install Gatling from [https://gatling.io/](https://gatling.io/).
+    ./gradlew test integrationTest jacocoTestReport
 
 For more information, refer to the [Running tests page][].
 
@@ -86,7 +91,7 @@ To stop it and remove the container, run:
 You can also fully dockerize your application and all the services that it depends on.
 To achieve this, first build a docker image of your app by running:
 
-    ./gradlew bootWar -Pprod buildDocker
+    ./gradlew bootJar -Pprod jibDockerBuild
 
 Then run:
 
@@ -99,12 +104,15 @@ For more information refer to [Using Docker and Docker-Compose][], this page als
 To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
 
 [jhipster homepage and latest documentation]: https://www.jhipster.tech
-[jhipster 6.5.0 archive]: https://www.jhipster.tech/documentation-archive/v6.5.0
-[doing microservices with jhipster]: https://www.jhipster.tech/documentation-archive/v6.5.0/microservices-architecture/
-[using jhipster in development]: https://www.jhipster.tech/documentation-archive/v6.5.0/development/
-[service discovery and configuration with consul]: https://www.jhipster.tech/documentation-archive/v6.5.0/microservices-architecture/#consul
-[using docker and docker-compose]: https://www.jhipster.tech/documentation-archive/v6.5.0/docker-compose
-[using jhipster in production]: https://www.jhipster.tech/documentation-archive/v6.5.0/production/
-[running tests page]: https://www.jhipster.tech/documentation-archive/v6.5.0/running-tests/
-[code quality page]: https://www.jhipster.tech/documentation-archive/v6.5.0/code-quality/
-[setting up continuous integration]: https://www.jhipster.tech/documentation-archive/v6.5.0/setting-up-ci/
+[jhipster 6.5.1 archive]: https://www.jhipster.tech/documentation-archive/v6.5.1
+[doing microservices with jhipster]: https://www.jhipster.tech/documentation-archive/v6.5.1/microservices-architecture/
+[using jhipster in development]: https://www.jhipster.tech/documentation-archive/v6.5.1/development/
+[service discovery and configuration with consul]: https://www.jhipster.tech/documentation-archive/v6.5.1/microservices-architecture/#consul
+[using docker and docker-compose]: https://www.jhipster.tech/documentation-archive/v6.5.1/docker-compose
+[using jhipster in production]: https://www.jhipster.tech/documentation-archive/v6.5.1/production/
+[running tests page]: https://www.jhipster.tech/documentation-archive/v6.5.1/running-tests/
+[code quality page]: https://www.jhipster.tech/documentation-archive/v6.5.1/code-quality/
+[setting up continuous integration]: https://www.jhipster.tech/documentation-archive/v6.5.1/setting-up-ci/
+[openapi-generator]: https://openapi-generator.tech
+[swagger-editor]: https://editor.swagger.io
+[doing api-first development]: https://www.jhipster.tech/documentation-archive/v6.5.1/doing-api-first-development/

@@ -16,18 +16,10 @@
 logging:
     level:
         ROOT: INFO
-        io.github.jhipster: INFO
         com.icthh.xm.tmf.ms.customer: INFO
-
-management:
-    metrics:
-        export:
-            prometheus:
-                enabled: true
+        io.github.jhipster: INFO
 
 spring:
-    kafka:
-        bootstrap-servers: localhost:9093
     devtools:
         restart:
             enabled: false
@@ -36,7 +28,7 @@ spring:
     cloud:
         consul:
             discovery:
-                prefer-ip-address: true
+               prefer-ip-address: true
             host: localhost
             port: 8500
     datasource:
@@ -45,10 +37,9 @@ spring:
         username: customer
         password:
         hikari:
-            poolName: Hikari
             auto-commit: false
     jpa:
-        database-platform: io.github.jhipster.domain.util.FixedPostgreSQL95Dialect
+        database-platform: io.github.jhipster.domain.util.FixedPostgreSQL82Dialect
         database: POSTGRESQL
         show-sql: false
         properties:
@@ -57,13 +48,6 @@ spring:
             hibernate.cache.use_second_level_cache: false
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: false
-            # modify batch size as necessary
-            hibernate.jdbc.batch_size: 25
-            hibernate.order_inserts: true
-            hibernate.order_updates: true
-            hibernate.query.fail_on_pagination_over_collection_fetch: true
-            hibernate.query.in_clause_parameter_padding: true
-    # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
     liquibase:
         contexts: prod
     mail:
@@ -73,16 +57,14 @@ spring:
         password:
     thymeleaf:
         cache: true
-    sleuth:
-        sampler:
-            probability: 1 # report 100% of traces
     zipkin: # Use the "zipkin" Maven profile to have the Spring Cloud Zipkin dependencies
         base-url: http://localhost:9411
         enabled: false
         locator:
             discovery:
                 enabled: true
-
+    kafka:
+        bootstrap-servers: localhost:9093
 # ===================================================================
 # To enable TLS in production, generate a certificate using:
 # keytool -genkey -alias customer -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
@@ -117,6 +99,7 @@ server:
 
 jhipster:
     http:
+        version: V_1_1 # To use HTTP/2 you will need SSL support (see above the "server.ssl" configuration)
         cache: # Used by the CachingHttpHeadersFilter
             timeToLiveInDays: 1461
     security:
@@ -126,20 +109,20 @@ jhipster:
             client-id: internal
             client-secret: internal
     mail: # specific JHipster mail property, for standard properties see MailProperties
+        from: customer@localhost
         base-url: http://my-server-url-to-change # Modify according to your server's URL
-    metrics:
-        logs: # Reports metrics in the logs
+    metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
+        jmx:
+            enabled: true
+        logs: # Reports Dropwizard metrics in the logs
             enabled: false
             report-frequency: 60 # in seconds
     logging:
-        use-json-format: false # By default, logs are not in Json format
         logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
             enabled: false
             host: localhost
             port: 5000
             queue-size: 512
-    audit-events:
-        retention-period: 30 # Number of days before audit events are deleted.
 oauth2:
     signature-verification:
         public-key-endpoint-uri: http://config/api/token_key
@@ -151,6 +134,7 @@ oauth2:
         #keep in sync with UAA configuration
         client-id: web_app
         secret: changeit
+
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

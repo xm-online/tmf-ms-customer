@@ -13,63 +13,64 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+
 spring:
-  application:
-    name: customer
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:mem:customer;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    name:
-    username:
-    password:
-    hikari:
-      auto-commit: false
-  jpa:
-    database-platform: io.github.jhipster.domain.util.FixedH2Dialect
-    database: H2
-    open-in-view: false
-    show-sql: false
-    hibernate:
-      ddl-auto: none
-      naming:
-        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
-        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
-    properties:
-      hibernate.id.new_generator_mappings: true
-      hibernate.connection.provider_disables_autocommit: true
-      hibernate.cache.use_second_level_cache: false
-      hibernate.cache.use_query_cache: false
-      hibernate.generate_statistics: false
-      hibernate.hbm2ddl.auto: validate
-      hibernate.jdbc.time_zone: UTC
-  liquibase:
-    contexts: test
-  mail:
-    host: localhost
-  main:
-    allow-bean-definition-overriding: true
-  messages:
-    basename: i18n/messages
-  mvc:
-    favicon:
-      enabled: false
-  task:
-    execution:
-      thread-name-prefix: customer-task-
-      pool:
-        core-size: 1
-        max-size: 50
-        queue-capacity: 10000
-    scheduling:
-      thread-name-prefix: customer-scheduling-
-      pool:
-        size: 1
-  thymeleaf:
-    mode: HTML
+    application:
+        name: customer
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:h2:mem:customer;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+        name:
+        username:
+        password:
+        hikari:
+            auto-commit: false
+    jpa:
+        database-platform: io.github.jhipster.domain.util.FixedH2Dialect
+        database: H2
+        open-in-view: false
+        show-sql: false
+        hibernate:
+            ddl-auto: none
+            naming:
+                physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+                implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        properties:
+            hibernate.id.new_generator_mappings: true
+            hibernate.connection.provider_disables_autocommit: true
+            hibernate.cache.use_second_level_cache: false
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: true
+            hibernate.hbm2ddl.auto: validate
+    liquibase:
+        contexts: test
+    mail:
+        host: localhost
+    main:
+        allow-bean-definition-overriding: true
+    cloud:
+        bus:
+            enabled: false
+        discovery:
+            enabled: false
+        consul:
+            enabled: false
+    messages:
+        basename: i18n/messages
+    mvc:
+        favicon:
+            enabled: false
+    thymeleaf:
+        mode: HTML
+
 
 server:
-  port: 10344
-  address: localhost
+    port: 10344
+    address: localhost
+
+info:
+    project:
+        version: #project.version#
 
 # ===================================================================
 # JHipster specific properties
@@ -77,38 +78,38 @@ server:
 # Full reference is available at: https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 management:
-  metrics:
-    export:
-      prometheus:
-        enabled: true
-
+    metrics:
+        export:
+            prometheus:
+                enabled: true
 jhipster:
-  clientApp:
-    name: 'customerApp'
-  logging:
-    # To test json console appender
-    use-json-format: true # By default, logs are in Json format
-    logstash:
-      enabled: false
-      host: localhost
-      port: 5000
-      queue-size: 512
-  security:
-    authentication:
-      jwt:
-        # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: MWFkYWVlZjE2YmQ5OTI3MDhiZDYzZGYwNjM5N2JiMmJhYTg3OGVlMzlmMzNiMTI0MmUwMGVkMGY1Y2NkZDE2YzhlMTI2OGRmY2Y1ZmE2MmVhMzA2NzhhMDcwZTE4MzU5NWQzYTFlMWMyZTE3ZGEwNjg2Y2YzMjRhMTFiMmE1ZWI=
-        # Token is valid 24 hours
-        token-validity-in-seconds: 86400
-    client-authorization:
-      access-token-uri: http://uaa/oauth/token
-      token-service-id: uaa
-      client-id: internal
-      client-secret: internal
-  metrics:
-    logs: # Reports metrics in the logs
-      enabled: true
-      report-frequency: 60 # in seconds
+    async:
+        core-pool-size: 1
+        max-pool-size: 50
+        queue-capacity: 10000
+    # To test logstash appender
+    logging:
+        logstash:
+            enabled: true
+            host: localhost
+            port: 5000
+            queue-size: 512
+    security:
+        authentication:
+            jwt:
+                # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
+                base64-secret: NzQyZTVjMDZjM2E0YTUwZTA2MGYxOGVkYzU3MDJkZjMxMjM3N2QwYTAxNzJhYjMzOTY5ZGYxMjQ4NDg3ZDMyZThiYzA4OGI1MWFlNjc1MjZlZDAyYTgwMWFkOWZhNmJjMmQ5MjFlNjcwOWM2YWY5NWFhMmIyYzAzZDY5OTFiNjg=
+                # Token is valid 24 hours
+                token-validity-in-seconds: 86400
+        client-authorization:
+            access-token-uri: http://uaa/oauth/token
+            token-service-id: uaa
+            client-id: internal
+            client-secret: internal
+    metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
+        logs: # Reports Dropwizard metrics in the logs
+            enabled: false
+
 
 # ===================================================================
 # Application specific properties
@@ -119,12 +120,13 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 xm-config:
-  enabled: false
+    enabled: false
 
 application:
-  kafka-system-topic: system_topic
-  kafka-system-queue: system_queue
-  tenant-ignored-path-list: /swagger-resources/configuration/ui, /management/health, /oauth/token_key, /h2-console
-  lep:
-    tenant-script-storage: XM_MS_CONFIG
-    lep-resource-path-pattern: /config/tenants/{tenantName}/entity/lep/resources/**/*
+    kafka-system-topic: system_topic
+    kafka-system-queue: system_queue
+    tenant-ignored-path-list: /swagger-resources/configuration/ui, /management/health, /oauth/token_key, /h2-console
+    timelines-enabled: true
+    lep:
+        tenant-script-storage: XM_MS_CONFIG
+        lep-resource-path-pattern: /config/tenants/{tenantName}/entity/lep/resources/**/*
