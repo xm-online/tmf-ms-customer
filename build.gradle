@@ -35,7 +35,7 @@ plugins {
 }
 
 group = "com.icthh.xm.tmf.ms.customer"
-version = ${project_version}
+version = "${project_version}"
 
 description = ""
 
