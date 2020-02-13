@@ -3,7 +3,7 @@
     "promptValues": {
       "packageName": "com.icthh.xm.tmf.ms.customer"
     },
-    "jhipsterVersion": "5.3.4",
+    "jhipsterVersion": "6.5.1",
     "applicationType": "microservice",
     "baseName": "customer",
     "packageName": "com.icthh.xm.tmf.ms.customer",
@@ -20,15 +20,17 @@
     "messageBroker": false,
     "serviceDiscoveryType": "consul",
     "buildTool": "gradle",
-    "enableSwaggerCodegen": false,
-    "jwtSecretKey": "NzQyZTVjMDZjM2E0YTUwZTA2MGYxOGVkYzU3MDJkZjMxMjM3N2QwYTAxNzJhYjMzOTY5ZGYxMjQ4NDg3ZDMyZThiYzA4OGI1MWFlNjc1MjZlZDAyYTgwMWFkOWZhNmJjMmQ5MjFlNjcwOWM2YWY5NWFhMmIyYzAzZDY5OTFiNjg=",
-    "enableTranslation": false,
-    "testFrameworks": [
-      "gatling",
-      "cucumber"
-    ],
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "NGYwOWRkOTFmNTRiZDhmMTU5YTRiMzc5ZDQ0NmJlNTczMWUwNDI1MzQyNDM0MjQxMmUzYTUxZGU0ZDNiZGY1YTZjNDA5NTI5YzEwNjE4MDc2MDE0YjQ5NGYzMzA1OTE3NDYxODhkNzMyMTM4ZjZhNTRkOWY3ZjBlNDdlMzA2ZGU=",
+    "embeddableLaunchScript": false,
+    "testFrameworks": [],
     "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
     "clientPackageManager": "npm",
+    "blueprints": [],
     "skipClient": true,
     "skipUserManagement": true
   }

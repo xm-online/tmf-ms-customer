@@ -46,6 +46,15 @@ spring:
         contexts: test
     mail:
         host: localhost
+    main:
+        allow-bean-definition-overriding: true
+    cloud:
+        bus:
+            enabled: false
+        discovery:
+            enabled: false
+        consul:
+            enabled: false
     messages:
         basename: i18n/messages
     mvc:
@@ -68,7 +77,11 @@ info:
 #
 # Full reference is available at: https://www.jhipster.tech/common-application-properties/
 # ===================================================================
-
+management:
+    metrics:
+        export:
+            prometheus:
+                enabled: true
 jhipster:
     async:
         core-pool-size: 1
@@ -94,10 +107,9 @@ jhipster:
             client-id: internal
             client-secret: internal
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
-        jmx.enabled: true
         logs: # Reports Dropwizard metrics in the logs
-            enabled: true
-            report-frequency: 60 # in seconds
+            enabled: false
+
 
 # ===================================================================
 # Application specific properties
