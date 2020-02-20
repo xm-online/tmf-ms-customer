@@ -13,15 +13,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.MultiTenancyStrategy;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Profile;
-
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -35,6 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.icthh.xm.commons.migration.db.Constants.CHANGE_LOG_PATH;
+import static io.github.jhipster.config.JHipsterConstants.SPRING_PROFILE_NO_LIQUIBASE;
 
 @Slf4j
 @Configuration
@@ -80,13 +79,15 @@ public class DatabaseConfiguration {
     @Bean
     public SpringLiquibase liquibase(DataSource dataSource, LiquibaseProperties liquibaseProperties) {
         schemaResolver.createSchemas(dataSource);
+
         SpringLiquibase liquibase = new XmSpringLiquibase();
         liquibase.setDataSource(dataSource);
         liquibase.setChangeLog(CHANGE_LOG_PATH);
         liquibase.setContexts(liquibaseProperties.getContexts());
         liquibase.setDefaultSchema(liquibaseProperties.getDefaultSchema());
         liquibase.setDropFirst(liquibaseProperties.isDropFirst());
-        if (env.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_NO_LIQUIBASE)) {
+
+        if (env.acceptsProfiles(Profiles.of(SPRING_PROFILE_NO_LIQUIBASE))) {
             liquibase.setShouldRun(false);
         } else {
             liquibase.setShouldRun(liquibaseProperties.isEnabled());
@@ -97,9 +98,8 @@ public class DatabaseConfiguration {
 
     @Bean
     @DependsOn("liquibase")
-    public MultiTenantSpringLiquibase multiTenantLiquibase(
-        DataSource dataSource,
-        LiquibaseProperties liquibaseProperties) {
+    public MultiTenantSpringLiquibase multiTenantLiquibase(DataSource dataSource, LiquibaseProperties liquibaseProperties) {
+
         MultiTenantSpringLiquibase liquibase = new XmMultiTenantSpringLiquibase();
         liquibase.setDataSource(dataSource);
         liquibase.setChangeLog(CHANGE_LOG_PATH);
@@ -107,7 +107,8 @@ public class DatabaseConfiguration {
         liquibase.setDefaultSchema(liquibaseProperties.getDefaultSchema());
         liquibase.setDropFirst(liquibaseProperties.isDropFirst());
         liquibase.setSchemas(schemaResolver.getSchemas());
-        if (env.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_NO_LIQUIBASE)) {
+
+        if (env.acceptsProfiles(Profiles.of(SPRING_PROFILE_NO_LIQUIBASE))) {
             liquibase.setShouldRun(false);
         } else {
             liquibase.setShouldRun(liquibaseProperties.isEnabled());
