@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.lang.reflect.Method;
 import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
@@ -35,16 +36,17 @@ public class ProfileKeyResolver extends AppendLepKeyResolver {
     }
 
     private <T> Optional<T> getHeaderValue(final String headerName, final Class<T> valueType) {
-        return ofNullable((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
-            .map(attributes -> attributes.getRequest().getHeader(headerName))
+        return ofNullable(RequestContextHolder.getRequestAttributes())
+            .map(ServletRequestAttributes.class::cast)
+            .map(ServletRequestAttributes::getRequest)
+            .map(request -> request.getHeader(headerName))
             .map(valueType::cast);
     }
 
     private String getMethodDescription(LepMethod method) {
-        MethodSignature methodSignature = method.getMethodSignature();
-        if (methodSignature != null && methodSignature.getMethod() != null) {
-            return methodSignature.getMethod().toString();
-        }
-        return method.toString();
+        return ofNullable(method.getMethodSignature())
+            .map(MethodSignature::getMethod)
+            .map(Method::toString)
+            .orElseGet(method::toString);
     }
 }
