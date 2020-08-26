@@ -21,6 +21,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Setter
 public class ApplicationProperties {
 
+    private boolean schedulerEnabled;
     private String kafkaSystemTopic;
     private String kafkaSystemQueue;
     private boolean timelinesEnabled;
