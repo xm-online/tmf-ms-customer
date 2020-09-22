@@ -3,6 +3,7 @@ package com.icthh.xm.tmf.ms.customer.config;
 import com.icthh.xm.commons.config.client.service.TenantConfigService;
 import com.icthh.xm.commons.lep.commons.CommonsService;
 import com.icthh.xm.commons.permission.service.PermissionCheckService;
+import com.icthh.xm.commons.security.XmAuthenticationContextHolder;
 import com.icthh.xm.tmf.ms.customer.lep.XmMsLepProcessingApplicationListener;
 import com.icthh.xm.tmf.ms.customer.service.CustomerService;
 import com.icthh.xm.tmf.ms.customer.service.SeparateTransactionExecutor;
@@ -26,7 +27,8 @@ public class LepAppEventListenerConfiguration {
         PermissionCheckService permissionCheckService,
         JdbcTemplate jdbcTemplate,
         SeparateTransactionExecutor transactionExecutor,
-        CustomerService customerService) {
+        CustomerService customerService,
+        XmAuthenticationContextHolder xmAuthenticationContextHolder) {
 
         return new XmMsLepProcessingApplicationListener(
             tenantConfigService,
@@ -35,7 +37,8 @@ public class LepAppEventListenerConfiguration {
             commonsService,
             permissionCheckService,
             transactionExecutor,
-            customerService
+            customerService,
+            xmAuthenticationContextHolder
         );
     }
 

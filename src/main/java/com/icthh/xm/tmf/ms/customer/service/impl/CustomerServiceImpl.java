@@ -1,4 +1,4 @@
- package com.icthh.xm.tmf.ms.customer.service.impl;
+package com.icthh.xm.tmf.ms.customer.service.impl;
 
 import static com.icthh.xm.tmf.ms.customer.util.StringUtil.toStringList;
 import static java.util.Objects.isNull;
@@ -6,7 +6,6 @@ import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toSet;
 
 import com.icthh.xm.commons.exceptions.BusinessException;
-import com.icthh.xm.commons.security.XmAuthenticationContextHolder;
 import com.icthh.xm.tmf.ms.customer.domain.CustomerCharacteristicEntity;
 import com.icthh.xm.tmf.ms.customer.domain.properties.CustomerCharacteristics;
 import com.icthh.xm.tmf.ms.customer.mapper.CustomerCharacteristicMapper;
@@ -25,7 +24,6 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +36,6 @@ public class CustomerServiceImpl
     private final CustomerCharacteristicMapper mapper;
     private final ConfigCustomerService configCustomerService;
     private final CustomerCharacteristicRepository customerCharacteristicRepository;
-    private final XmAuthenticationContextHolder xmAuthenticationContextHolder;
 
     @Override
     //todo V: review the test and leave it if okay
@@ -52,7 +49,6 @@ public class CustomerServiceImpl
 
     @Override
     public List<Customer> getCustomerFirebaseIds(List<String> ids) {   //todo V!: move to LEP
-        log.info("Hello");
         Specification<CustomerCharacteristicEntity> spec = Specification.where(
             (Specification<CustomerCharacteristicEntity>) (root, query, criteriaBuilder) ->
                 criteriaBuilder.and(criteriaBuilder.like(root.get("key"), "REGISTRATION-TOKEN%"),
@@ -72,13 +68,6 @@ public class CustomerServiceImpl
     @Transactional
     public Customer patchCustomer(String customerId, List<PatchOperation> patchOperations) {
         Customer customer = new Customer();
-
-        if (customerId.equalsIgnoreCase("self")) { //todo V!: move to LEP?
-            customerId = xmAuthenticationContextHolder.getContext().getUserKey()
-                .filter(StringUtils::isNoneBlank)
-                .orElseThrow(() ->
-                    new IllegalStateException("User key is not present in the security context"));
-        }
 
         for (PatchOperation update : patchOperations) {
             Characteristic characteristic = update.getValue();
