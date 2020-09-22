@@ -4,6 +4,7 @@ import com.icthh.xm.commons.config.client.service.TenantConfigService;
 import com.icthh.xm.commons.lep.commons.CommonsService;
 import com.icthh.xm.commons.permission.service.PermissionCheckService;
 import com.icthh.xm.tmf.ms.customer.lep.XmMsLepProcessingApplicationListener;
+import com.icthh.xm.tmf.ms.customer.service.CustomerService;
 import com.icthh.xm.tmf.ms.customer.service.SeparateTransactionExecutor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +25,8 @@ public class LepAppEventListenerConfiguration {
         CommonsService commonsService,
         PermissionCheckService permissionCheckService,
         JdbcTemplate jdbcTemplate,
-        SeparateTransactionExecutor transactionExecutor) {
+        SeparateTransactionExecutor transactionExecutor,
+        CustomerService customerService) {
 
         return new XmMsLepProcessingApplicationListener(
             tenantConfigService,
@@ -32,7 +34,8 @@ public class LepAppEventListenerConfiguration {
             jdbcTemplate,
             commonsService,
             permissionCheckService,
-            transactionExecutor
+            transactionExecutor,
+            customerService
         );
     }
 

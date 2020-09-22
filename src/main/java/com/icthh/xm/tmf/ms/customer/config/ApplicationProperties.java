@@ -31,6 +31,11 @@ public class ApplicationProperties {
 
     private List<String> tenantIgnoredPathList = Collections.emptyList();
 
+    /**
+     * Ant Path pattern to lookup customer property file (config ms)
+     */
+    private String tenantCustomerPropertiesPathPattern;
+
     @Getter
     @Setter
     public static class Lep {

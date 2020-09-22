@@ -16,6 +16,7 @@ import com.icthh.xm.commons.lep.spring.SpringLepProcessingApplicationListener;
 import com.icthh.xm.commons.permission.service.PermissionCheckService;
 import com.icthh.xm.lep.api.ScopedContext;
 
+import com.icthh.xm.tmf.ms.customer.service.CustomerService;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,6 +39,7 @@ public class XmMsLepProcessingApplicationListener extends SpringLepProcessingApp
     private final CommonsService commonsService;
     private final PermissionCheckService permissionCheckService;
     private final SeparateTransactionExecutor transactionExecutor;
+    private final CustomerService customerService;
 
     @Override
     protected void bindExecutionContext(ScopedContext executionContext) {
@@ -46,6 +48,7 @@ public class XmMsLepProcessingApplicationListener extends SpringLepProcessingApp
         services.put(BINDING_SUB_KEY_SERVICE_TENANT_CONFIG_SERICE, tenantConfigService);
         services.put(BINDING_SUB_KEY_PERMISSION_SERVICE, permissionCheckService);
         services.put(BINDING_SUB_KEY_SERVICE_SEPARATE_TRANSACTION_EXECUTOR, transactionExecutor);
+        services.put("customerService", customerService);
 
         executionContext.setValue(BINDING_KEY_COMMONS, new CommonsExecutor(commonsService));
         executionContext.setValue(BINDING_KEY_SERVICES, services);
