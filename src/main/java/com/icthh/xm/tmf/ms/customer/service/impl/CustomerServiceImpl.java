@@ -48,13 +48,7 @@ public class CustomerServiceImpl
     }
 
     @Override
-    public List<Customer> getCustomerFirebaseIds(List<String> ids) {   //todo V!: move to LEP
-        Specification<CustomerCharacteristicEntity> spec = Specification.where(
-            (Specification<CustomerCharacteristicEntity>) (root, query, criteriaBuilder) ->
-                criteriaBuilder.and(criteriaBuilder.like(root.get("key"), "REGISTRATION-TOKEN%"),
-                    root.get("customerId").in(ids))
-        );
-
+    public List<Customer> getCustomerBySpecification(Specification<CustomerCharacteristicEntity> spec) {
         List<CustomerCharacteristicEntity> all = customerCharacteristicRepository.findAll(spec);
 
         return all.stream()

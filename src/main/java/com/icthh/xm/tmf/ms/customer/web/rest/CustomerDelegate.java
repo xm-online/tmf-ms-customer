@@ -11,7 +11,6 @@ import com.icthh.xm.tmf.ms.customer.lep.keyresolver.ProfileKeyResolver;
 import com.icthh.xm.tmf.ms.customer.model.Customer;
 import com.icthh.xm.tmf.ms.customer.model.PatchOperation;
 import com.icthh.xm.tmf.ms.customer.service.CustomerService;
-import java.util.Arrays;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +32,7 @@ public class CustomerDelegate implements CustomerApiDelegate {
     public ResponseEntity<List<Customer>> retrieveCustomer(String id,
                                                            String profile,
                                                            String fields) {
-        return ok(customerService.getCustomerFirebaseIds(Arrays.asList(id.split(","))));
+        return ok().build();
     }
 
     @Timed

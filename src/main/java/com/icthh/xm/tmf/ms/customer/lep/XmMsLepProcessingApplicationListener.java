@@ -3,6 +3,7 @@ package com.icthh.xm.tmf.ms.customer.lep;
 import static com.icthh.xm.tmf.ms.customer.lep.LepXmCustomerConstants.BINDING_KEY_COMMONS;
 import static com.icthh.xm.tmf.ms.customer.lep.LepXmCustomerConstants.BINDING_KEY_SERVICES;
 import static com.icthh.xm.tmf.ms.customer.lep.LepXmCustomerConstants.BINDING_KEY_TEMPLATES;
+import static com.icthh.xm.tmf.ms.customer.lep.LepXmCustomerConstants.BINDING_SUB_KEY_CUSTOMER_SERVICE;
 import static com.icthh.xm.tmf.ms.customer.lep.LepXmCustomerConstants.BINDING_SUB_KEY_PERMISSION_SERVICE;
 import static com.icthh.xm.tmf.ms.customer.lep.LepXmCustomerConstants.BINDING_SUB_KEY_SERVICE_SEPARATE_TRANSACTION_EXECUTOR;
 import static com.icthh.xm.tmf.ms.customer.lep.LepXmCustomerConstants.BINDING_SUB_KEY_SERVICE_TENANT_CONFIG_SERICE;
@@ -49,8 +50,8 @@ public class XmMsLepProcessingApplicationListener extends SpringLepProcessingApp
         services.put(BINDING_SUB_KEY_SERVICE_TENANT_CONFIG_SERICE, tenantConfigService);
         services.put(BINDING_SUB_KEY_PERMISSION_SERVICE, permissionCheckService);
         services.put(BINDING_SUB_KEY_SERVICE_SEPARATE_TRANSACTION_EXECUTOR, transactionExecutor);
-        services.put("customerService", customerService); //todo V: needed?
         services.put(BINDING_SUB_KEY_XM_AUTHENTICATION_CONTEXT_HOLDER, xmAuthenticationContextHolder);
+        services.put(BINDING_SUB_KEY_CUSTOMER_SERVICE, customerService);
 
         executionContext.setValue(BINDING_KEY_COMMONS, new CommonsExecutor(commonsService));
         executionContext.setValue(BINDING_KEY_SERVICES, services);
