@@ -25,10 +25,6 @@ import org.springframework.core.io.ClassPathResource;
 public class TenantManagerConfiguration {
 
     private static final String DEFAULT_CONFIG_PATH = "config/specs/default-customer.yml";
-    private ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-
-    @Value("${spring.application.name}")
-    private String applicationName;
 
     @Bean
     public TenantManager tenantManager(
