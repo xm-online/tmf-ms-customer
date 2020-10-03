@@ -32,7 +32,7 @@ public class CustomerDelegate implements CustomerApiDelegate {
     public ResponseEntity<List<Customer>> retrieveCustomer(String id,
                                                            String profile,
                                                            String fields) {
-        return ok().build();
+        return ok(customerService.getCustomer(id, profile, fields));
     }
 
     @Timed
