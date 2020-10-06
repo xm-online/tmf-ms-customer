@@ -1,0 +1,12 @@
+---
+characteristics:
+    - keyRegexp: lenguage
+      defaultValue: ua
+      maxLength:
+      minLength:
+      predefinedValues:
+        - ua
+        - ru
+        - en
+
+

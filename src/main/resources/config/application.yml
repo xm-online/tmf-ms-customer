@@ -175,6 +175,8 @@ application:
         max-attempts: 3
         delay: 1000 #in milliseconds
         multiplier: 2
+    # Ant Path pattern to lookup customer configuration file (config ms)
+    tenant-customer-properties-path-pattern: "/config/tenants/{tenantName}/customer/customer.yml"
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

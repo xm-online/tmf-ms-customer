@@ -1,8 +1,17 @@
 package com.icthh.xm.tmf.ms.customer;
 
+import com.icthh.xm.commons.logging.util.MdcUtils;
+import com.icthh.xm.commons.tenant.TenantContextUtils;
+import com.icthh.xm.commons.tenant.TenantKey;
+import com.icthh.xm.commons.tenant.internal.DefaultTenantContextHolder;
 import com.icthh.xm.tmf.ms.customer.config.ApplicationProperties;
 import com.icthh.xm.tmf.ms.customer.config.DefaultProfileUtil;
 import io.github.jhipster.config.JHipsterConstants;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Arrays;
+import java.util.Collection;
+import javax.annotation.PostConstruct;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +22,6 @@ import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.core.env.Environment;
-
-import javax.annotation.PostConstruct;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.Collection;
 
 @SpringBootApplication(scanBasePackages = { "com.icthh.xm", "com.icthh.xm.tmf.ms.customer" })
 @EnableAutoConfiguration
@@ -52,6 +55,8 @@ public class CustomerApp {
             log.error("You have misconfigured your application! It should not " +
                 "run with both the 'dev' and 'cloud' profiles at the same time.");
         }
+
+        initContexts();
     }
 
     /**
@@ -103,5 +108,12 @@ public class CustomerApp {
         }
         log.info("\n----------------------------------------------------------\n\t" +
                 "Config Server: \t{}\n----------------------------------------------------------", configServerStatus);
+    }
+
+    private static void initContexts() {
+        TenantKey superKey = TenantKey.valueOf(TenantKey.SUPER_TENANT_KEY_VALUE.toUpperCase());
+        log.debug("Initializing tenant context {}", superKey);
+        TenantContextUtils.setTenant(new DefaultTenantContextHolder(), superKey);
+        MdcUtils.putRid(MdcUtils.getRid() + "::" + superKey.getValue());
     }
 }

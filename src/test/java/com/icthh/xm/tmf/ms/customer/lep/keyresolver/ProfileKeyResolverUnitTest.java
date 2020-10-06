@@ -8,6 +8,7 @@ import com.icthh.xm.lep.api.LepManager;
 import com.icthh.xm.lep.api.LepMethod;
 import com.icthh.xm.lep.api.Version;
 import com.icthh.xm.lep.core.CoreLepManager;
+import com.icthh.xm.tmf.ms.customer.service.CustomerService;
 import com.icthh.xm.tmf.ms.customer.web.rest.CustomerDelegate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,6 +44,9 @@ public class ProfileKeyResolverUnitTest {
     @Mock
     private CoreLepManager lepManager;
 
+    @Mock
+    private CustomerService customerService;
+
     @Captor
     private ArgumentCaptor<LepKey> baseLepKey;
 
@@ -67,7 +71,7 @@ public class ProfileKeyResolverUnitTest {
         when(applicationContext.getBean(ProfileKeyResolver.class)).thenReturn(resolver);
 
         lepServiceHandler.onMethodInvoke(CustomerDelegate.class,
-            new CustomerDelegate(), method, new Object[]{null, PROFILE_VALUE, null});
+            new CustomerDelegate(customerService), method, new Object[]{null, PROFILE_VALUE, null});
 
         verify(lepManager)
             .processLep(baseLepKey.capture(), version.capture(), keyResolver.capture(), lepMethod.capture());
@@ -95,7 +99,7 @@ public class ProfileKeyResolverUnitTest {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
         lepServiceHandler.onMethodInvoke(CustomerDelegate.class,
-            new CustomerDelegate(), method, new Object[]{null, null, null});
+            new CustomerDelegate(customerService), method, new Object[]{null, null, null});
 
         verify(lepManager)
             .processLep(baseLepKey.capture(), version.capture(), keyResolver.capture(), lepMethod.capture());

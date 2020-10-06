@@ -175,7 +175,9 @@ paths:
                         "$ref": "#/definitions/Error"
         patch:
             operationId: patchCustomer
-            summary: Updates partially a 'Customer' by Id
+            summary: Updates partially a 'Customer'
+            consumes:
+              - application/json-patch+json
             tags:
             - customer
             parameters:
@@ -184,12 +186,14 @@ paths:
               name: id
               in: path
               description: Identifier of the Customer
-            - schema:
-                  "$ref": "#/definitions/Customer_Update"
-              required: true
+            - required: true
+              schema:
+                type: array
+                items:
+                  "$ref": "#/definitions/Patch_Operation"
               in: body
-              name: customer
-              description: The Customer to be updated
+              name: operations
+              description: A list of Customer patch operations
             responses:
                 '200':
                     description: Updated
@@ -492,6 +496,21 @@ definitions:
                 type: array
                 items:
                     "$ref": "#/definitions/RelatedPartyRef"
+    Patch_Operation:
+      type: object
+      description: |2-
+
+        Patch operation object corresponding to json-patch+json specification
+      properties:
+            "op":
+                type: string
+                description: "Operation type: 'add', 'remove', 'replace'"
+            "path":
+                type: string
+                description: "Json pointer, e.g. '/characteristic/-'"
+            "value":
+              "$ref": "#/definitions/Characteristic"
+
     Customer_Update:
         type: object
         description: |2-
