@@ -2,8 +2,8 @@
 characteristics:
     - keyRegexp: lenguage
       defaultValue: ua
-      maxLength:
-      minLength:
+      max:
+      min:
       predefinedValues:
         - ua
         - ru
