@@ -24,6 +24,7 @@ public class ApplicationProperties {
     private boolean schedulerEnabled;
     private String kafkaSystemTopic;
     private String kafkaSystemQueue;
+    private String exceptionTranslator;
     private boolean timelinesEnabled;
     private String dbSchemaSuffix;
     private final Retry retry = new Retry();
