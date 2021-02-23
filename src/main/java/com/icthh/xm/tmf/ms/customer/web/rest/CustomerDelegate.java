@@ -11,6 +11,7 @@ import com.icthh.xm.tmf.ms.customer.lep.keyresolver.ProfileKeyResolver;
 import com.icthh.xm.tmf.ms.customer.model.Customer;
 import com.icthh.xm.tmf.ms.customer.model.PatchOperation;
 import com.icthh.xm.tmf.ms.customer.service.CustomerService;
+import com.icthh.xm.tmf.ms.customer.validation.RequiredHeader;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ public class CustomerDelegate implements CustomerApiDelegate {
     @LogicExtensionPoint(value = "RetrieveCustomer", resolver = ProfileKeyResolver.class)
     @PreAuthorize("hasPermission({'id': #id, 'profile': #profile}, 'CUSTOMER.GET')")
     @PrivilegeDescription("Privilege to get a customer")
+    @RequiredHeader(values =  "Profile")
     @Override
     public ResponseEntity<List<Customer>> retrieveCustomer(String id,
                                                            String profile,
@@ -39,6 +41,7 @@ public class CustomerDelegate implements CustomerApiDelegate {
     @LogicExtensionPoint(value = "PatchCustomer")
     @PreAuthorize("hasPermission({'id': #id, 'patchOperations': #operations}, 'CUSTOMER.PATCH')")
     @PrivilegeDescription("Privilege to patch a customer")
+    @RequiredHeader(values =  "Profile")
     @Override
     public ResponseEntity<Customer> patchCustomer(String id, List<PatchOperation> operations) {
         return ok(customerService.patchCustomer(id, operations));
