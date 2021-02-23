@@ -31,10 +31,8 @@ public class ProfileKeyResolver extends AppendLepKeyResolver {
         HttpServletRequest request =
             ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         return ofNullable(request.getHeader("Profile"))
-            .or(() -> of(getParamValue(method, "profile", String.class)))
-            .orElseThrow(() -> new IllegalArgumentException(
-                String.format("Neither LEP method %s nor request header contain parameter %s",
-                    getMethodDescription(method), "profile")));
+            .or(() -> ofNullable(getParamValue(method, "profile", String.class)))
+            .orElseGet(String::new);
     }
 
     @Override
