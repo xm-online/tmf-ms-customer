@@ -7,6 +7,7 @@ import com.icthh.xm.commons.lep.LogicExtensionPoint;
 import com.icthh.xm.commons.lep.spring.LepService;
 import com.icthh.xm.commons.permission.annotation.PrivilegeDescription;
 import com.icthh.xm.tmf.ms.customer.api.CustomerApiDelegate;
+import com.icthh.xm.tmf.ms.customer.lep.keyresolver.PatchCustomerProfileKeyResolver;
 import com.icthh.xm.tmf.ms.customer.lep.keyresolver.ProfileKeyResolver;
 import com.icthh.xm.tmf.ms.customer.model.Customer;
 import com.icthh.xm.tmf.ms.customer.model.PatchOperation;
@@ -36,7 +37,7 @@ public class CustomerDelegate implements CustomerApiDelegate {
     }
 
     @Timed
-    @LogicExtensionPoint(value = "PatchCustomer")
+    @LogicExtensionPoint(value = "PatchCustomer", resolver = PatchCustomerProfileKeyResolver.class)
     @PreAuthorize("hasPermission({'id': #id, 'patchOperations': #operations}, 'CUSTOMER.PATCH')")
     @PrivilegeDescription("Privilege to patch a customer")
     @Override
