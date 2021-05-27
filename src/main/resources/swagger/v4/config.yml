@@ -1,0 +1,12 @@
+additionalProperties:
+  apiVersion: V4
+files:
+  apiController.mustache:
+    templateType: API
+    destinationFilename: ControllerV4.java
+  apiDelegate.mustache:
+    templateType: API
+    destinationFilename: DelegateV4.java
+  api.mustache:
+    templateType: API
+    destinationFilename: V4.java

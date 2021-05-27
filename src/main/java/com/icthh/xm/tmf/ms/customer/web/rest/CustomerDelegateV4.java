@@ -4,7 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.icthh.xm.commons.lep.LogicExtensionPoint;
 import com.icthh.xm.commons.lep.spring.LepService;
 import com.icthh.xm.commons.permission.annotation.PrivilegeDescription;
-import com.icthh.xm.tmf.ms.customer.api.v4.CustomerApiDelegate;
+import com.icthh.xm.tmf.ms.customer.api.v4.CustomerApiDelegateV4;
 import com.icthh.xm.tmf.ms.customer.lep.keyresolver.ProfileKeyResolver;
 import com.icthh.xm.tmf.ms.customer.model.v4.CustomerUpdateV4;
 import com.icthh.xm.tmf.ms.customer.model.v4.CustomerV4;
@@ -14,9 +14,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
 @Component
-@LepService(group = "service", name = "default")
+@LepService(group = "service")
 @AllArgsConstructor
-public class CustomerDelegateV4 implements CustomerApiDelegate {
+public class CustomerDelegateV4 implements CustomerApiDelegateV4 {
 
     @Timed
     @LogicExtensionPoint(value = "RetrieveCustomer", resolver = ProfileKeyResolver.class)
