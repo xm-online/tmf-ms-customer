@@ -44,4 +44,13 @@ public class CustomerDelegate implements CustomerApiDelegate {
     public ResponseEntity<Customer> patchCustomer(String id, List<PatchOperation> operations) {
         return ok(customerService.patchCustomer(id, operations));
     }
+
+    @Timed
+    @LogicExtensionPoint(value = "RetrieveCustomer", resolver = ProfileKeyResolver.class)
+    @PreAuthorize("hasPermission({'id': #id, 'profile': #profile}, 'CUSTOMER.GET')")
+    @PrivilegeDescription("Privilege to get a customers list")
+    @Override
+    public ResponseEntity<List<Customer>> listCustomer(String fields, Integer offset, Integer limit) {
+        return ok().build();
+    }
 }
