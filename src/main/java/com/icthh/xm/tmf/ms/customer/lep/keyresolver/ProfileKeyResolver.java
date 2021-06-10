@@ -27,7 +27,7 @@ public class ProfileKeyResolver extends AppendLepKeyResolver {
         return new String[]{translated};
     }
 
-    String getProfile(LepMethod method) {
+    private String getProfile(LepMethod method) {
         HttpServletRequest request =
             ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         return ofNullable(request.getHeader("Profile"))
