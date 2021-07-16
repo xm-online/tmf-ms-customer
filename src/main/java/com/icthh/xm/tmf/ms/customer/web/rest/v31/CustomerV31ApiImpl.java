@@ -1,4 +1,4 @@
-package com.icthh.xm.tmf.ms.customer.web.rest.v4;
+package com.icthh.xm.tmf.ms.customer.web.rest.v31;
 
 import com.codahale.metrics.annotation.Timed;
 import com.icthh.xm.commons.lep.LogicExtensionPoint;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 public class CustomerV31ApiImpl implements CustomerV31ApiDelegate {
 
     @Timed
-    @LogicExtensionPoint(value = "PatchCustomer", resolver = PatchCustomerProfileKeyResolver.class)
+    @LogicExtensionPoint(value = "PatchCustomerV31", resolver = PatchCustomerProfileKeyResolver.class)
     @PreAuthorize("hasPermission({'id': #id, 'patchOperations': #operations}, 'CUSTOMER.PATCH')")
     @PrivilegeDescription("Privilege to patch a customer")
     @Override

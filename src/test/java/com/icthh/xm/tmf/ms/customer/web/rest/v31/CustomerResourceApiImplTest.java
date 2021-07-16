@@ -1,4 +1,4 @@
-package com.icthh.xm.tmf.ms.customer.web.rest.v4;
+package com.icthh.xm.tmf.ms.customer.web.rest.v31;
 
 import static com.icthh.xm.tmf.ms.customer.web.rest.TestUtil.loadRequest;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
