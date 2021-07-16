@@ -3,6 +3,14 @@
  * generate Spring-MVC endpoint stubs at compile time from an OpenAPI definition file
  */
 apply plugin: "org.openapi.generator"
+buildscript {
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath "org.openapitools:openapi-generator-gradle-plugin:${openapi_plugin_version}"
+    }
+}
 
 openApiGenerate {
     generatorName = "spring"
@@ -18,6 +26,21 @@ openApiGenerate {
     importMappings = [Problem:"org.zalando.problem.Problem"]
 }
 
+task openApiGenerateV4(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask){
+    generatorName = "spring"
+    inputSpec = "$rootDir/src/main/resources/swagger/api_v4.yml".toString()
+    outputDir = "$buildDir/openapi".toString()
+    apiPackage = "com.icthh.xm.tmf.ms.customer.api.v4"
+    modelPackage = "com.icthh.xm.tmf.ms.customer.model.v4"
+    apiFilesConstrainedTo = [""]
+    modelFilesConstrainedTo = [""]
+    supportingFilesConstrainedTo = ["ApiUtil.java"]
+    configOptions = [delegatePattern: "true", title: "customer"]
+    validateSpec = true
+    importMappings = [Problem:"org.zalando.problem.Problem"]
+    additionalProperties = [useTags: "true"]
+}
+
 sourceSets {
     main {
         java {
@@ -27,3 +50,4 @@ sourceSets {
 }
 
 compileJava.dependsOn("openApiGenerate")
+compileJava.dependsOn("openApiGenerateV4")

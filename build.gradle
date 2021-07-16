@@ -211,12 +211,23 @@ repositories {
     mavenLocal()
     mavenCentral()
     jcenter()
+    maven {
+        name 'artifactory-release-local'
+        url "$itsf_artifactory_contextUrl/libs-release-local/"
+        credentials {
+            username itsf_artifactory_user
+            password itsf_artifactory_password
+        }
+    }
     //jhipster-needle-gradle-repositories - JHipster will add additional repositories
 }
 
 dependencies {
     // import JHipster dependencies BOM
     implementation platform("io.github.jhipster:jhipster-dependencies:${jhipster_dependencies_version}" )
+    implementation 'com.oracle:ojdbc8:18.3.0.0'
+    implementation 'com.jcraft:jsch:0.1.55'
+    implementation 'com.itsmartflex.ms.foris:itsf-ms-foris-swagger-api:v202101271246-ece860c9'
 
     // Use ", version: jhipster_dependencies_version, changing: true" if you want
     // to use a SNAPSHOT release instead of a stable release
