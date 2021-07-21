@@ -1,0 +1,13 @@
+[
+  {
+    "op": "add",
+    "path": "/relatedParty/-",
+    "value": {
+      "id": "380502596980",
+      "name": "Jim Doe",
+      "role": "UR120",
+      "accessType": "MA",
+      "text": "some description text"
+    }
+  }
+]
