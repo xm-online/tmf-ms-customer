@@ -58,7 +58,7 @@ public class CustomerDelegate implements CustomerApiDelegate {
     @Timed
     @LogicExtensionPoint(value = "CreateCustomer", resolver = ProfileKeyResolver.class)
     @PreAuthorize("hasPermission({'customer': #customer}, 'CUSTOMER.CREATE')")
-    @PrivilegeDescription("Privilege to get a customers list")
+    @PrivilegeDescription("Privilege to create customer")
     @Override
     public ResponseEntity<Customer> createCustomer(CustomerCreate customer) {
         return ok().build();
