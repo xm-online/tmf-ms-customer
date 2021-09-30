@@ -10,6 +10,7 @@ import com.icthh.xm.tmf.ms.customer.api.CustomerApiDelegate;
 import com.icthh.xm.tmf.ms.customer.lep.keyresolver.PatchCustomerProfileKeyResolver;
 import com.icthh.xm.tmf.ms.customer.lep.keyresolver.ProfileKeyResolver;
 import com.icthh.xm.tmf.ms.customer.model.Customer;
+import com.icthh.xm.tmf.ms.customer.model.CustomerCreate;
 import com.icthh.xm.tmf.ms.customer.model.PatchOperation;
 import com.icthh.xm.tmf.ms.customer.service.CustomerService;
 import java.util.List;
@@ -51,6 +52,15 @@ public class CustomerDelegate implements CustomerApiDelegate {
     @PrivilegeDescription("Privilege to get a customers list")
     @Override
     public ResponseEntity<List<Customer>> listCustomer(String fields, Integer offset, Integer limit) {
+        return ok().build();
+    }
+
+    @Timed
+    @LogicExtensionPoint(value = "CreateCustomer", resolver = ProfileKeyResolver.class)
+    @PreAuthorize("hasPermission({'customer': #customer}, 'CUSTOMER.CREATE')")
+    @PrivilegeDescription("Privilege to get a customers list")
+    @Override
+    public ResponseEntity<Customer> createCustomer(CustomerCreate customer) {
         return ok().build();
     }
 }
