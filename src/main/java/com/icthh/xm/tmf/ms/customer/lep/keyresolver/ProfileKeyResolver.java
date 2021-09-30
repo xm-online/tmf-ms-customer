@@ -1,6 +1,5 @@
 package com.icthh.xm.tmf.ms.customer.lep.keyresolver;
 
-import static java.util.Optional.of;
 import static java.util.Optional.ofNullable;
 
 import com.icthh.xm.commons.lep.AppendLepKeyResolver;
@@ -11,6 +10,7 @@ import com.icthh.xm.lep.api.commons.SeparatorSegmentedLepKey;
 import java.lang.reflect.Method;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -32,7 +32,7 @@ public class ProfileKeyResolver extends AppendLepKeyResolver {
             ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         return ofNullable(request.getHeader("Profile"))
             .or(() -> ofNullable(getParamValue(method, "profile", String.class)))
-            .orElseGet(String::new);
+            .orElse(Strings.EMPTY);
     }
 
     @Override
