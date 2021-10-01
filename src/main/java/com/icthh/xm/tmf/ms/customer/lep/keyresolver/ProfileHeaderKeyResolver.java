@@ -9,6 +9,7 @@ import com.icthh.xm.lep.api.LepMethod;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -22,7 +23,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  */
 @Component
 @RequiredArgsConstructor
-public class PatchCustomerProfileKeyResolver implements LepKeyResolver {
+public class ProfileHeaderKeyResolver implements LepKeyResolver {
 
     private final ProfileKeyResolver profileKeyResolver;
 
@@ -31,8 +32,8 @@ public class PatchCustomerProfileKeyResolver implements LepKeyResolver {
         HttpServletRequest request =
                 ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         String profile = ofNullable(request.getHeader("Profile"))
-                .orElseGet(String::new);
-        if (!StringUtils.isBlank(profile)) {
+                .orElse(Strings.EMPTY);
+        if (StringUtils.isNotBlank(profile)) {
             return profileKeyResolver.resolve(baseKey, method, managerService);
         }
         return baseKey;

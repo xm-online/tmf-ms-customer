@@ -7,9 +7,10 @@ import com.icthh.xm.commons.lep.LogicExtensionPoint;
 import com.icthh.xm.commons.lep.spring.LepService;
 import com.icthh.xm.commons.permission.annotation.PrivilegeDescription;
 import com.icthh.xm.tmf.ms.customer.api.CustomerApiDelegate;
-import com.icthh.xm.tmf.ms.customer.lep.keyresolver.PatchCustomerProfileKeyResolver;
+import com.icthh.xm.tmf.ms.customer.lep.keyresolver.ProfileHeaderKeyResolver;
 import com.icthh.xm.tmf.ms.customer.lep.keyresolver.ProfileKeyResolver;
 import com.icthh.xm.tmf.ms.customer.model.Customer;
+import com.icthh.xm.tmf.ms.customer.model.CustomerCreate;
 import com.icthh.xm.tmf.ms.customer.model.PatchOperation;
 import com.icthh.xm.tmf.ms.customer.service.CustomerService;
 import java.util.List;
@@ -37,7 +38,7 @@ public class CustomerDelegate implements CustomerApiDelegate {
     }
 
     @Timed
-    @LogicExtensionPoint(value = "PatchCustomer", resolver = PatchCustomerProfileKeyResolver.class)
+    @LogicExtensionPoint(value = "PatchCustomer", resolver = ProfileHeaderKeyResolver.class)
     @PreAuthorize("hasPermission({'id': #id, 'patchOperations': #operations}, 'CUSTOMER.PATCH')")
     @PrivilegeDescription("Privilege to patch a customer")
     @Override
@@ -51,6 +52,15 @@ public class CustomerDelegate implements CustomerApiDelegate {
     @PrivilegeDescription("Privilege to get a customers list")
     @Override
     public ResponseEntity<List<Customer>> listCustomer(String fields, Integer offset, Integer limit) {
+        return ok().build();
+    }
+
+    @Timed
+    @LogicExtensionPoint(value = "CreateCustomer", resolver = ProfileHeaderKeyResolver.class)
+    @PreAuthorize("hasPermission({'customer': #customer}, 'CUSTOMER.CREATE')")
+    @PrivilegeDescription("Privilege to create customer")
+    @Override
+    public ResponseEntity<Customer> createCustomer(CustomerCreate customer) {
         return ok().build();
     }
 }

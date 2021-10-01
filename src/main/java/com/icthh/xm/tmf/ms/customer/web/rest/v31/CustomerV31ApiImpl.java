@@ -5,7 +5,7 @@ import com.icthh.xm.commons.lep.LogicExtensionPoint;
 import com.icthh.xm.commons.lep.spring.LepService;
 import com.icthh.xm.commons.permission.annotation.PrivilegeDescription;
 import com.icthh.xm.tmf.ms.customer.api.v31.CustomerV31ApiDelegate;
-import com.icthh.xm.tmf.ms.customer.lep.keyresolver.PatchCustomerProfileKeyResolver;
+import com.icthh.xm.tmf.ms.customer.lep.keyresolver.ProfileHeaderKeyResolver;
 import com.icthh.xm.tmf.ms.customer.model.v31.Customer;
 import com.icthh.xm.tmf.ms.customer.model.v31.PatchOperation;
 import java.util.List;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 public class CustomerV31ApiImpl implements CustomerV31ApiDelegate {
 
     @Timed
-    @LogicExtensionPoint(value = "PatchCustomerV31", resolver = PatchCustomerProfileKeyResolver.class)
+    @LogicExtensionPoint(value = "PatchCustomerV31", resolver = ProfileHeaderKeyResolver.class)
     @PreAuthorize("hasPermission({'id': #id, 'patchOperations': #operations}, 'CUSTOMER.PATCH')")
     @PrivilegeDescription("Privilege to patch a customer")
     @Override
