@@ -28,7 +28,7 @@ public class CustomerDelegate implements CustomerApiDelegate {
 
     @Timed
     @LogicExtensionPoint(value = "RetrieveCustomer", resolver = ProfileKeyResolver.class)
-    @PreAuthorize("hasPermission({'id': #id, 'profile': #profile}, 'CUSTOMER.GET')")
+    @PreAuthorize("hasPermission({'id': #id, 'profile': #profile, 'requestHeaderExtractor': @requestHeaderExtractor}, 'CUSTOMER.GET')")
     @PrivilegeDescription("Privilege to get a customer")
     @Override
     public ResponseEntity<List<Customer>> retrieveCustomer(String id,
@@ -39,7 +39,7 @@ public class CustomerDelegate implements CustomerApiDelegate {
 
     @Timed
     @LogicExtensionPoint(value = "PatchCustomer", resolver = ProfileHeaderKeyResolver.class)
-    @PreAuthorize("hasPermission({'id': #id, 'patchOperations': #operations}, 'CUSTOMER.PATCH')")
+    @PreAuthorize("hasPermission({'id': #id, 'patchOperations': #operations, 'requestHeaderExtractor': @requestHeaderExtractor}, 'CUSTOMER.PATCH')")
     @PrivilegeDescription("Privilege to patch a customer")
     @Override
     public ResponseEntity<Customer> patchCustomer(String id, List<PatchOperation> operations) {
@@ -48,7 +48,7 @@ public class CustomerDelegate implements CustomerApiDelegate {
 
     @Timed
     @LogicExtensionPoint(value = "RetrieveCustomer", resolver = ProfileKeyResolver.class)
-    @PreAuthorize("hasPermission({'id': #id, 'profile': #profile}, 'CUSTOMER.GET')")
+    @PreAuthorize("hasPermission({'id': #id, 'profile': #profile, 'requestHeaderExtractor': @requestHeaderExtractor}, 'CUSTOMER.GET')")
     @PrivilegeDescription("Privilege to get a customers list")
     @Override
     public ResponseEntity<List<Customer>> listCustomer(String fields, Integer offset, Integer limit) {
@@ -57,10 +57,19 @@ public class CustomerDelegate implements CustomerApiDelegate {
 
     @Timed
     @LogicExtensionPoint(value = "CreateCustomer", resolver = ProfileHeaderKeyResolver.class)
-    @PreAuthorize("hasPermission({'customer': #customer}, 'CUSTOMER.CREATE')")
+    @PreAuthorize("hasPermission({'customer': #customer, 'requestHeaderExtractor': @requestHeaderExtractor}, 'CUSTOMER.CREATE')")
     @PrivilegeDescription("Privilege to create customer")
     @Override
     public ResponseEntity<Customer> createCustomer(CustomerCreate customer) {
+        return ok().build();
+    }
+
+    @Timed
+    @LogicExtensionPoint(value = "DeleteCustomer", resolver = ProfileHeaderKeyResolver.class)
+    @PreAuthorize("hasPermission({'customer': #customer, 'requestHeaderExtractor': @requestHeaderExtractor}, 'CUSTOMER.DELETE')")
+    @PrivilegeDescription("Privilege to delete customer")
+    @Override
+    public ResponseEntity<Void> deleteCustomer(String id) {
         return ok().build();
     }
 }
