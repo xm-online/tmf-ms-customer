@@ -10,11 +10,13 @@ import com.icthh.xm.lep.api.commons.SeparatorSegmentedLepKey;
 import java.lang.reflect.Method;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+@Slf4j
 @Component
 public class ProfileKeyResolver extends AppendLepKeyResolver {
 
@@ -30,9 +32,11 @@ public class ProfileKeyResolver extends AppendLepKeyResolver {
     private String getProfile(LepMethod method) {
         HttpServletRequest request =
             ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        return ofNullable(request.getHeader("Profile"))
+        String profile = ofNullable(request.getHeader("Profile"))
             .or(() -> ofNullable(getParamValue(method, "profile", String.class)))
             .orElse(Strings.EMPTY);
+        log.info("getProfile: result: {}", profile);
+        return profile;
     }
 
     @Override
