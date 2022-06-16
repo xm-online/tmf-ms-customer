@@ -144,6 +144,7 @@ definitions:
           "$ref": "#/definitions/RelatedPartyRef"
   Patch_Operation:
     type: object
+    discriminator: '@type'
     description: |2-
 
       Patch operation object corresponding to json-patch+json specification
@@ -156,6 +157,9 @@ definitions:
         description: "Json pointer, e.g. '/characteristic/-'"
       value:
         $ref: "#/definitions/Any"
+      '@type':
+        type: string
+        description: The class type of the actual resource (for type extension).
   TimePeriod:
     type: object
     description: A base / value business entity used to represent a period of time

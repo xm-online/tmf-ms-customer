@@ -498,6 +498,7 @@ definitions:
                     "$ref": "#/definitions/RelatedPartyRef"
     Patch_Operation:
       type: object
+      discriminator: '@type'
       description: |2-
 
         Patch operation object corresponding to json-patch+json specification
@@ -510,7 +511,9 @@ definitions:
                 description: "Json pointer, e.g. '/characteristic/-'"
             "value":
               "$ref": "#/definitions/Characteristic"
-
+            '@type':
+              type: string
+              description: The class type of the actual resource (for type extension).
     Customer_Update:
         type: object
         description: |2-

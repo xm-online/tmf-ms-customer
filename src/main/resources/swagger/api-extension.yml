@@ -1,0 +1,14 @@
+swagger: '2.0'
+info:
+  title: Customer Management Extentions
+  version: 1.0.0
+paths: {}
+definitions:
+  ExtendedPatch_Operation:
+    allOf:
+      -   $ref: 'api.yml#/definitions/Patch_Operation'
+      -   type: object
+          properties:
+            reason:
+              type: string
+              description: "Operation reason"
