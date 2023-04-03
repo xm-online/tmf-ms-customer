@@ -78,6 +78,11 @@ spring:
                 enabled: true
     kafka:
         bootstrap-servers: localhost:9093
+    redis:
+        host: localhost
+        port: 6379
+    cache:
+        type: simple
 
 server:
     port: 8711

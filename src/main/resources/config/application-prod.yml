@@ -65,6 +65,11 @@ spring:
                 enabled: true
     kafka:
         bootstrap-servers: localhost:9093
+    redis:
+        host: localhost
+        port: 6379
+    cache:
+        type: simple
 # ===================================================================
 # To enable TLS in production, generate a certificate using:
 # keytool -genkey -alias customer -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650

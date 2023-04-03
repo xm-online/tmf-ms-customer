@@ -8,6 +8,7 @@ import static com.icthh.xm.tmf.ms.customer.lep.LepXmCustomerConstants.BINDING_SU
 import static com.icthh.xm.tmf.ms.customer.lep.LepXmCustomerConstants.BINDING_SUB_KEY_SERVICE_SEPARATE_TRANSACTION_EXECUTOR;
 import static com.icthh.xm.tmf.ms.customer.lep.LepXmCustomerConstants.BINDING_SUB_KEY_SERVICE_TENANT_CONFIG_SERICE;
 import static com.icthh.xm.tmf.ms.customer.lep.LepXmCustomerConstants.BINDING_SUB_KEY_TEMPLATE_JDBC;
+import static com.icthh.xm.tmf.ms.customer.lep.LepXmCustomerConstants.BINDING_SUB_KEY_TEMPLATE_REDIS;
 import static com.icthh.xm.tmf.ms.customer.lep.LepXmCustomerConstants.BINDING_SUB_KEY_TEMPLATE_REST;
 import static com.icthh.xm.tmf.ms.customer.lep.LepXmCustomerConstants.BINDING_SUB_KEY_XM_AUTHENTICATION_CONTEXT_HOLDER;
 
@@ -25,6 +26,7 @@ import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * The {@link XmMsLepProcessingApplicationListener} class.
@@ -35,6 +37,7 @@ public class XmMsLepProcessingApplicationListener extends SpringLepProcessingApp
     private final TenantConfigService tenantConfigService;
 
     private final RestTemplate restTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
     private final JdbcTemplate jdbcTemplate;
 
     private final CommonsService commonsService;
@@ -59,6 +62,7 @@ public class XmMsLepProcessingApplicationListener extends SpringLepProcessingApp
         // templates
         Map<String, Object> templates = new HashMap<>();
         templates.put(BINDING_SUB_KEY_TEMPLATE_REST, restTemplate);
+        templates.put(BINDING_SUB_KEY_TEMPLATE_REDIS, redisTemplate);
         templates.put(BINDING_SUB_KEY_TEMPLATE_JDBC, jdbcTemplate);
 
         executionContext.setValue(BINDING_KEY_TEMPLATES, templates);
