@@ -73,11 +73,11 @@ eclipse {
 defaultTasks "bootRun"
 
 springBoot {
-    mainClass = "com.icthh.xm.ms.mstemplate.MstemplateApp"
+    mainClass = "com.icthh.xm.ms.Customer.CustomerApp"
 }
 
-String[] testCategories = ['com.icthh.xm.ms.mstemplate.AbstractSpringBootTest',
-                           'com.icthh.xm.ms.mstemplate.AbstractUnitTest']
+String[] testCategories = ['com.icthh.xm.tmf.ms.customer.AbstractSpringBootTest',
+                           'com.icthh.xm.tmf.ms.customer.AbstractUnitTest']
 
 Closure testLoggingConf = {
     exceptionFormat = 'full'

@@ -3,7 +3,7 @@ jib {
         image = "openjdk:17-alpine"
     }
     to {
-        image = "mstemplate:latest"
+        image = "tmf-ms-customer:latest"
     }
     container {
         entrypoint = ["sh", "-c", "/entrypoint.sh"]

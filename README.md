@@ -1,4 +1,4 @@
-# mstemplate
+# tmf-ms-customer
 
 This application was generated using JHipster 7.8.1, you can find documentation and help at [https://www.jhipster.tech](https://www.jhipster.tech).
 
@@ -9,7 +9,7 @@ This is a "microservice" application intended to be part of a microservice archi
 2. Start project in you local XM environment and check if it is working, run tests.
 3. Remove `.git/` folder before project modification.
 4. Add project to new git repository where it will evolve and live.
-5. Find and replace `mstemplate` term everywhere in the projects.
+5. Find and replace `tmf-ms-customer` term everywhere in the projects.
 6. Find end remove everything related to `ExampleEntityFirst` and `ExampleEntitySecond` (after checking how it is proposed to use)
 7. Do you need to use database:
    - if YES - correct liquibase scripts in `resources/config/liquibase`
@@ -44,7 +44,7 @@ Database support multi tenancy by adding commons `xm-commons-migration-db`
 Configuration files for Liquibase are in `resources/config/liquibase`.
 
 **NOTE:** on the micoservice level you still need custom configuration for DB:
-`com.icthh.xm.ms.mstemplate.config.XmDatabaseConfiguration`
+`config.com.icthh.xm.ms.tmf.ms.customer.XmDatabaseConfiguration`
 
 Here you can decide if you need or do not need H2 and also provide base package for scan.
 

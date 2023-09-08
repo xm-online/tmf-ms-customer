@@ -19,4 +19,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "mstemplate"
+rootProject.name = "tmf-ms-customer"
