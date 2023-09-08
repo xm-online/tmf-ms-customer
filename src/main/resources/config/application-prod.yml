@@ -1,0 +1,73 @@
+logging:
+  level:
+    ROOT: INFO
+    tech.jhipster: INFO
+    com.icthh.xm.ms.mstemplate: INFO
+
+management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+spring:
+  devtools:
+    restart:
+      enabled: false
+    livereload:
+      enabled: false
+  cloud:
+    # if you need to start service without consul, use next configuration and disable consul by spring.cloud.consul.enabled
+#    discovery:
+#      client:
+#        simple:
+#          instances:
+#            config:
+#              - instanceId: config
+#                serviceId: config
+#                host: localhost
+#                port: 8084
+    consul:
+      discovery:
+        prefer-ip-address: true
+      host: localhost
+      port: 8500
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/mstemplate
+    username: mstemplate
+    password:
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+  jpa:
+    database-platform: tech.jhipster.domain.util.FixedPostgreSQL10Dialect
+  # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
+  liquibase:
+    contexts: prod
+  thymeleaf:
+    cache: true
+
+server:
+  port: 8081
+  shutdown: graceful # see https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-graceful-shutdown
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,application/javascript,application/json,image/svg+xml
+    min-response-size: 1024
+
+# ===================================================================
+# JHipster specific properties
+#
+# Full reference is available at: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+jhipster:
+  logging:
+    use-json-format: false # By default, logs are not in Json format
+    logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
+      enabled: false
+      host: localhost
+      port: 5000
+
+# application:

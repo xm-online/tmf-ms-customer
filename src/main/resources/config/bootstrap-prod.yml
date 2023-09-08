@@ -1,0 +1,11 @@
+# ===================================================================
+# Spring Cloud Consul Config bootstrap configuration for the "prod" profile
+# ===================================================================
+
+spring:
+  cloud:
+    consul:
+      retry:
+        initial-interval: 1000
+        max-interval: 2000
+        max-attempts: 100
