@@ -9,7 +9,7 @@ spring:
     # Uncomment the following line to enable tests against production database type rather than H2, using Testcontainers
     #active: testcontainers
   application:
-    name: mstemplate
+    name: customer
   cloud:
     stream:
       kafka:
@@ -17,7 +17,7 @@ spring:
           autoCreateTopics: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:mem:mstemplate;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:customer;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;NON_KEYWORDS=value,key
     name:
     username:
     password:
@@ -27,7 +27,7 @@ spring:
     serialization:
       write-durations-as-timestamps: false
   jpa:
-    database-platform: io.github.jhipster.domain.util.FixedH2Dialect
+    database-platform: org.hibernate.dialect.H2Dialect
     database: H2
     open-in-view: false
     show-sql: true
@@ -47,6 +47,7 @@ spring:
       hibernate.jdbc.time_zone: UTC
   liquibase:
     contexts: test
+    change-log: config/liquibase/master.xml
   mail:
     host: localhost
   main:

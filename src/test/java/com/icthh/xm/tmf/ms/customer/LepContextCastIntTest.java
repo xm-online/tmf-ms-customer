@@ -60,16 +60,16 @@ public class LepContextCastIntTest extends AbstractSpringBootTest {
         tenantContextHolder.getPrivilegedContext().destroyCurrentContext();
     }
 
-//    @Test
-//    @SneakyThrows
-//    public void testLepContextCast() {
-//        String prefix = "/config/tenants/TEST_TENANT/customer/lep/test/";
-//        String key = prefix + "ScriptWithAround$$around.groovy";
-//        String body = "import com.icthh.xm.tmf.ms.customer.config.lep.LepContext;\nLepContext context = lepContext\nreturn ['context':context]";
-//        leps.onRefresh(key, body);
-//        Map<String, Object> result = testLepService.sayHello();
-//        Assertions.assertTrue(result.get("context") instanceof LepContext);
-//        leps.onRefresh(key, null);
-//    }
+    @Test
+    @SneakyThrows
+    public void testLepContextCast() {
+        String prefix = "/config/tenants/TEST_TENANT/customer/lep/test/";
+        String key = prefix + "ScriptWithAround$$around.groovy";
+        String body = "import com.icthh.xm.tmf.ms.customer.config.lep.LepContext;\nLepContext context = lepContext\nreturn ['context':context]";
+        leps.onRefresh(key, body);
+        Map<String, Object> result = testLepService.sayHello();
+        Assertions.assertTrue(result.get("context") instanceof LepContext);
+        leps.onRefresh(key, null);
+    }
 
 }
