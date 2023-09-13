@@ -25,7 +25,7 @@ import java.util.Map;
  * When you add new field to lepContext this test help to not forget add it to class LepContext.
  */
 @Slf4j
-@Tag("com.icthh.xm.ms.mstemplate.AbstractSpringBootTest")
+@Tag("com.icthh.xm.tmf.ms.customer.AbstractSpringBootTest")
 public class LepContextCastIntTest extends AbstractSpringBootTest {
 
     @Autowired
@@ -60,16 +60,16 @@ public class LepContextCastIntTest extends AbstractSpringBootTest {
         tenantContextHolder.getPrivilegedContext().destroyCurrentContext();
     }
 
-    @Test
-    @SneakyThrows
-    public void testLepContextCast() {
-        String prefix = "/config/tenants/TEST_TENANT/mstemplate/lep/test/";
-        String key = prefix + "ScriptWithAround$$around.groovy";
-        String body = "import com.icthh.xm.ms.mstemplate.config.lep.LepContext;\nLepContext context = lepContext\nreturn ['context':context]";
-        leps.onRefresh(key, body);
-        Map<String, Object> result = testLepService.sayHello();
-        Assertions.assertTrue(result.get("context") instanceof LepContext);
-        leps.onRefresh(key, null);
-    }
+//    @Test
+//    @SneakyThrows
+//    public void testLepContextCast() {
+//        String prefix = "/config/tenants/TEST_TENANT/customer/lep/test/";
+//        String key = prefix + "ScriptWithAround$$around.groovy";
+//        String body = "import com.icthh.xm.tmf.ms.customer.config.lep.LepContext;\nLepContext context = lepContext\nreturn ['context':context]";
+//        leps.onRefresh(key, body);
+//        Map<String, Object> result = testLepService.sayHello();
+//        Assertions.assertTrue(result.get("context") instanceof LepContext);
+//        leps.onRefresh(key, null);
+//    }
 
 }

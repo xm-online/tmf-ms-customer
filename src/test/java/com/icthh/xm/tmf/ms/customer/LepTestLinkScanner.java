@@ -16,8 +16,7 @@ public class LepTestLinkScanner {
     private static String PROJECT_ROOT = Paths.get("").toAbsolutePath().toString();
     private static String XM_REPOSITORY_HOME;
 
-    // TODO replace by microservice name
-    private static final String XM_MS_NAME = "mstemplate";
+    private static final String XM_MS_NAME = "customer";
 
     private static final String XM_REPOSITORY_TENANTS = "config/tenants";
     private static final String XM_REPOSITORY_MS_TEST = XM_MS_NAME + "/test";

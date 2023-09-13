@@ -25,7 +25,7 @@ plugins {
     //jhipster-needle-gradle-plugins - JHipster will add additional gradle plugins here
 }
 
-group = "com.icthh.xm.ms.mstemplate"
+group = "com.icthh.xm.tmf.ms.customer"
 
 sourceCompatibility=17
 targetCompatibility=17
@@ -193,6 +193,7 @@ dependencies {
     implementation "org.openapitools:jackson-databind-nullable:${jacksonDatabindNullableVersion}"
     implementation "javax.transaction:javax.transaction-api"
     implementation "org.hibernate:hibernate-entitymanager"
+    implementation "org.hibernate:hibernate-envers"
     implementation "org.hibernate.validator:hibernate-validator"
     implementation "org.liquibase:liquibase-core"
 
@@ -236,7 +237,7 @@ dependencies {
     implementation "com.icthh.xm.commons:xm-commons-topic:${xm_commons_version}"
     implementation "com.icthh.xm.commons:xm-commons-logging-configurable:${xm_commons_version}"
     implementation "com.icthh.xm.commons:xm-commons-logging-trace:${xm_commons_version}"
-    implementation "com.icthh.xm.commons:xm-commons-client-feign:${xm_commons_version}"
+    implementation "org.zalando:problem-spring-web"
 
     testCompileOnly "org.projectlombok:lombok:${lombok_version}"
     testAnnotationProcessor "org.projectlombok:lombok:${lombok_version}"

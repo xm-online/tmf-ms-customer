@@ -14,7 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
         IntegrationTestConfiguration.class,
         TestLepConfiguration.class,
 })
-@Tag("com.icthh.xm.ms.mstemplate.AbstractSpringBootTest")
+@Tag("com.icthh.xm.tmf.ms.customer.AbstractSpringBootTest")
 @ExtendWith(SpringExtension.class)
 public abstract class AbstractSpringBootTest {
 

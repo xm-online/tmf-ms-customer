@@ -67,7 +67,7 @@ management:
 
 spring:
   application:
-    name: mstemplate
+    name: customer
   main:
     allow-bean-definition-overriding: true
   cloud:
@@ -85,8 +85,8 @@ spring:
       enabled: true
       discovery:
         healthCheckPath: /management/health
-        instanceId: mstemplate:${spring.application.instance-id:${random.value}}
-        service-name: mstemplate
+        instanceId: customer:${spring.application.instance-id:${random.value}}
+        service-name: customer
       config:
         watch:
           enabled: false
@@ -103,6 +103,8 @@ spring:
         - api-docs
   jmx:
     enabled: false # TODO false ot true ?
+  liquibase:
+    change-log: config/liquibase/master.xml
   data:
     jpa:
       repositories:
@@ -176,12 +178,12 @@ info:
 
 jhipster:
   clientApp:
-    name: 'mstemplateApp'
+    name: 'customerApp'
   api-docs:
     default-include-pattern: ${server.servlet.context-path:}/api/**
     management-include-pattern: ${server.servlet.context-path:}/management/**
-    title: Mstemplate API
-    description: Mstemplate API documentation
+    title: Customer API
+    description: Customer API documentation
   security:
     content-security-policy: "default-src 'self'; frame-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com data:"
 

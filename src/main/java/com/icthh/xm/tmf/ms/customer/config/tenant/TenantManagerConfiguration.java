@@ -20,18 +20,17 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 @org.springframework.context.annotation.Configuration
 public class TenantManagerConfiguration {
 
+    private static final String DEFAULT_CONFIG_PATH = "/config/default-customer.yml";
+
     @Bean
     public TenantManager tenantManager(TenantAbilityCheckerProvisioner abilityCheckerProvisioner,
                                        TenantDatabaseProvisioner databaseProvisioner,
                                        TenantConfigProvisioner configProvisioner,
                                        TenantListProvisioner tenantListProvisioner) {
 
-        TenantManager manager = TenantManager.builder()
-                                             .service(abilityCheckerProvisioner)
-                                             .service(tenantListProvisioner)
-                                             .service(configProvisioner)
-                                             .service(databaseProvisioner)
-                                             .build();
+        TenantManager manager =
+                TenantManager.builder().service(abilityCheckerProvisioner).service(tenantListProvisioner)
+                        .service(configProvisioner).service(databaseProvisioner).build();
         log.info("Configured tenant manager: {}", manager);
         return manager;
     }
@@ -40,13 +39,10 @@ public class TenantManagerConfiguration {
     @Bean
     public TenantConfigProvisioner tenantConfigProvisioner(TenantConfigRepository tenantConfigRepository,
                                                            ApplicationProperties applicationProperties) {
-        TenantConfigProvisioner provisioner = TenantConfigProvisioner
-            .builder()
-            .tenantConfigRepository(tenantConfigRepository)
-            .configuration(of().path(applicationProperties.getSpecificationPathPattern())
-                               .content(readResource("/config/example-of-microservice-spec.yml"))
-                               .build())
-            .build();
+        TenantConfigProvisioner provisioner =
+                TenantConfigProvisioner.builder().tenantConfigRepository(tenantConfigRepository).configuration(
+                        of().path(applicationProperties.getSpecificationPathPattern())
+                                .content(readResource(DEFAULT_CONFIG_PATH)).build()).build();
 
         log.info("Configured tenant config provisioner: {}", provisioner);
         return provisioner;
