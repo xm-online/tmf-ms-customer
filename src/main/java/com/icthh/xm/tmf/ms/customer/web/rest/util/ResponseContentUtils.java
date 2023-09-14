@@ -1,4 +1,4 @@
-package com.icthh.xm.tmf.ms.customer.web.rest.utils;
+package com.icthh.xm.tmf.ms.customer.web.rest.util;
 
 import com.icthh.xm.commons.exceptions.EntityNotFoundException;
 import java.util.Optional;

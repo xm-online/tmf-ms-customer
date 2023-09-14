@@ -1,4 +1,4 @@
-package com.icthh.xm.tmf.ms.customer.web.rest.utils;
+package com.icthh.xm.tmf.ms.customer.web.rest.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

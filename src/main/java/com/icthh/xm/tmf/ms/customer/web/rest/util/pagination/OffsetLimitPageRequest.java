@@ -1,4 +1,4 @@
-package com.icthh.xm.tmf.ms.customer.web.rest.utils.pagination;
+package com.icthh.xm.tmf.ms.customer.web.rest.util.pagination;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
