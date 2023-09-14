@@ -13,6 +13,11 @@ public class ApplicationProperties {
     private List<String> tenantIgnoredPathList = Collections.emptyList();
     private List<String> timelineIgnoredHttpMethods = Collections.emptyList();
 
+    /**
+     * Ant Path pattern to lookup customer property file (config ms)
+     */
+    private String tenantCustomerPropertiesPathPattern;
+
     private boolean timelinesEnabled;
     private boolean kafkaEnabled;
     private boolean schedulerEnabled;
