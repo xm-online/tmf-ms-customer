@@ -215,6 +215,7 @@ dependencies {
     implementation "org.springframework.security:spring-security-config"
     implementation "org.springframework.security:spring-security-data"
     implementation "org.springframework.security:spring-security-web"
+    implementation "org.springframework.security:spring-security-oauth2-client"
 
     implementation ("org.springdoc:springdoc-openapi-webmvc-core")
     implementation "org.postgresql:postgresql"
