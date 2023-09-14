@@ -190,6 +190,7 @@ jhipster:
 application:
   specification-path-pattern: /config/tenants/{tenantName}/${spring.application.name}/example-of-microservice-spec.yml
   tenant-ignored-path-list: /v2/api-docs, /api/profile-info, /swagger-resources/configuration/ui, /management/health, /management/prometheus
+  tenant-customer-properties-path-pattern: "/config/tenants/{tenantName}/customer/customer.yml"
   timeline-ignored-http-methods:
 
   timelines-enabled: false
