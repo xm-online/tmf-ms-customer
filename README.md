@@ -214,8 +214,8 @@ Usually it is configured in compose file as following:
 ```yaml
 version: '3.8'
 services:
-  mstemplate-app:
-    image: mstemplate
+  customer-app:
+    image: customer
     environment:
       - XMX=512M
       - TZ=UTC
@@ -223,7 +223,7 @@ services:
 
 ### Packaging as jar
 
-To build the final jar and optimize the mstemplate application for production, run:
+To build the final jar and optimize the customer application for production, run:
 
 ```
 ./gradlew -Pprod clean bootJar

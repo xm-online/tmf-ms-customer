@@ -1,24 +1,24 @@
 # This configuration is intended for development purpose, it's **your** responsibility to harden it for production
 version: '3.8'
 services:
-  mstemplate-app:
-    image: mstemplate
+  customer-app:
+    image: customer
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,api-docs
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
       - SPRING_CLOUD_CONSUL_HOST=consul
       - SPRING_CLOUD_CONSUL_PORT=8500
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://mstemplate-postgresql:5432/mstemplate
-      - SPRING_LIQUIBASE_URL=jdbc:postgresql://mstemplate-postgresql:5432/mstemplate
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://customer-postgresql:5432/customer
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://customer-postgresql:5432/customer
       - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
       - TZ=UTC
-  mstemplate-postgresql:
+  customer-postgresql:
     image: postgres:14.2
     # volumes:
-    #   - ~/volumes/jhipster/mstemplate/postgresql/:/var/lib/postgresql/data/
+    #   - ~/volumes/jhipster/customer/postgresql/:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=mstemplate
+      - POSTGRES_USER=customer
       - POSTGRES_PASSWORD=
       - POSTGRES_HOST_AUTH_METHOD=trust
     # If you want to expose these ports outside your dev PC,

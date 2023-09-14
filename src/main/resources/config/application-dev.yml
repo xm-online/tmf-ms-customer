@@ -3,7 +3,7 @@ logging:
     ROOT: DEBUG
     tech.jhipster: DEBUG
     org.hibernate.SQL: DEBUG
-    com.icthh.xm.ms.mstemplate: DEBUG
+    com.icthh.xm.tmf.ms.customer: DEBUG
 
 spring:
   devtools:
@@ -30,8 +30,8 @@ spring:
       port: 7777
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:mem:mstemplate;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    username: mstemplate
+    url: jdbc:h2:mem:customer;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: customer
     password:
     hikari:
       poolName: Hikari

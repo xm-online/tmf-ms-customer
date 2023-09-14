@@ -2,7 +2,7 @@ logging:
   level:
     ROOT: INFO
     tech.jhipster: INFO
-    com.icthh.xm.ms.mstemplate: INFO
+    com.icthh.xm.tmf.ms.customer: INFO
 
 management:
   metrics:
@@ -34,8 +34,8 @@ spring:
       port: 8500
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/mstemplate
-    username: mstemplate
+    url: jdbc:postgresql://localhost:5432/customer
+    username: customer
     password:
     hikari:
       poolName: Hikari
