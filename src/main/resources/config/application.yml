@@ -137,6 +137,9 @@ spring:
     default-property-inclusion: non_empty
   kafka:
     bootstrap-servers: localhost:9092
+    consumer:
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 #  To start using feign client with authentication, use this configuration and provide correct
 #  token-uri, client-id and client-secret
   security:
