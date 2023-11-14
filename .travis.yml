@@ -1,7 +1,7 @@
 dist: trusty
 language: java
 jdk:
-  - openjdk11
+  - openjdk17
 install: true
 addons:
   sonarcloud:
