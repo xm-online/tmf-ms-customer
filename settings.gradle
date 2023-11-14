@@ -20,3 +20,7 @@ pluginManagement {
 }
 
 rootProject.name = "tmf-ms-customer"
+include 'tmf-ms-customer-xm-starter'
+include 'tmf-ms-customer-core'
+include 'tmf-ms-customer-api'
+

@@ -23,7 +23,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @Component
 @LepService(group = "service", name = "default")
 @AllArgsConstructor
-public class CustomerDelegate implements CustomerApiDelegate {
+public class LepCustomerDelegate implements CustomerApiDelegate {
 
     private final CustomerService customerService;
 

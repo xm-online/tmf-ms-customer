@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group 'com.icthh.xm.tmf.ms.customer'
+version '0.0.2'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'org.springframework.boot:spring-boot-starter:2.7.3'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.7.3'
+    implementation group: 'org.springframework', name: 'spring-web', version: '5.3.22'
+
+    implementation project(":tmf-ms-customer-api")
+    implementation project(":tmf-ms-customer-core")
+}
+
+test {
+    useJUnitPlatform()
+}

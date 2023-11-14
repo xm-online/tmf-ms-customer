@@ -1,0 +1,25 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="CustomerApp" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" value="dev" />
+    <envs>
+      <env name="APPLICATION_DB_SCHEMA_SUFFIX" value="_customer" />
+      <env name="SPRING_CLOUD_CONSUL_ENABLED" value="false" />
+      <env name="SPRING_DATASOURCE_DRIVER_CLASSNAME" value="oracle.jdbc.driver.OracleDriver" />
+      <env name="SPRING_DATASOURCE_PASSWORD" value="xmPass" />
+      <env name="SPRING_DATASOURCE_URL" value="jdbc:oracle:thin:@itsf-mw-db.dc:1533/dev_mw" />
+      <env name="SPRING_DATASOURCE_USERNAME" value="XM_CUSTOMER" />
+      <env name="SPRING_JPA_DATABASE" value="ORACLE" />
+      <env name="SPRING_JPA_DATABASE_PLATFORM" value="org.hibernate.dialect.Oracle12cDialect" />
+      <env name="SPRING_JPA_PROPERTIES_DB_SCHEMA_CREATION_ENABLED" value="false" />
+      <env name="SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT" value="org.hibernate.dialect.Oracle12cDialect" />
+      <env name="SPRING_LIQUIBASE_ENABLED" value="false" />
+      <env name="SPRING_MAIN_ALLOW_CIRCULAR_REFERENCES" value="true" />
+    </envs>
+    <module name="tmf-ms-customer.main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.icthh.xm.tmf.ms.customer.CustomerApp" />
+    <option name="VM_PARAMETERS" value="-Dspring.cloud.discovery.client.simple.instances.config[0].uri=http://localhost:8084 -Dspring.cloud.discovery.client.simple.instances.uaa[0].uri=http://localhost:9999" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

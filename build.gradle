@@ -33,7 +33,6 @@ assert System.properties["java.specification.version"] == "17"
 
 apply from: "gradle/docker.gradle"
 apply from: "gradle/sonar.gradle"
-apply from: "gradle/swagger.gradle"
 apply from: "gradle/version.gradle"
 //jhipster-needle-gradle-apply-from - JHipster will add additional gradle scripts to be applied here
 
@@ -253,6 +252,16 @@ dependencies {
     testImplementation "com.h2database:h2"
     developmentOnly "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
+
+    implementation "com.oracle.database.jdbc:ojdbc8"
+    implementation project(":tmf-ms-customer-api")
+    implementation project(":tmf-ms-customer-core")
+    implementation project(":tmf-ms-customer-xm-starter")
+//    implementation project(":tmf-ms-customer-xm-starter")
+//    implementation 'com.itsmartflex.ms.foris:itsf-ms-foris-swagger-api:v2023-08-23.07-11-00-273e9dbc'
+//    implementation 'com.itsmartflex.ms.gsr:itsf-ms-gsr-client:v202202150939-c5529614'
+//    implementation "com.itsmartflex.commons:itsf-commons-dbss:0.2.6"
+
 }
 
 task cleanResources(type: Delete) {
