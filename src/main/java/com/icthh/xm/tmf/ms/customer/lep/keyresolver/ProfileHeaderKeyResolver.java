@@ -1,18 +1,19 @@
 package com.icthh.xm.tmf.ms.customer.lep.keyresolver;
 
-import static java.util.Optional.ofNullable;
-
 import com.icthh.xm.lep.api.LepKey;
 import com.icthh.xm.lep.api.LepKeyResolver;
 import com.icthh.xm.lep.api.LepManagerService;
 import com.icthh.xm.lep.api.LepMethod;
-import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+
+import static java.util.Optional.ofNullable;
 
 
 /**

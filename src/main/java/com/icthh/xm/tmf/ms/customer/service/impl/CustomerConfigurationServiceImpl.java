@@ -1,7 +1,5 @@
 package com.icthh.xm.tmf.ms.customer.service.impl;
 
-import static org.apache.commons.lang.StringUtils.isBlank;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.icthh.xm.commons.config.client.api.RefreshableConfiguration;
@@ -10,12 +8,15 @@ import com.icthh.xm.commons.tenant.TenantContextUtils;
 import com.icthh.xm.tmf.ms.customer.config.ApplicationProperties;
 import com.icthh.xm.tmf.ms.customer.domain.properties.CustomerCharacteristics;
 import com.icthh.xm.tmf.ms.customer.service.CustomerConfigurationService;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.AntPathMatcher;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Configuration service implementation that use Configuration ms as a source.
