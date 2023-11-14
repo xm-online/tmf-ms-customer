@@ -1,9 +1,10 @@
 package com.icthh.xm.tmf.ms.customer.web.rest.util.pagination;
 
-import java.util.Objects;
-import java.util.StringJoiner;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+
+import java.util.Objects;
+import java.util.StringJoiner;
 
 /**
  * <p>
@@ -12,16 +13,15 @@ import org.springframework.data.domain.Sort;
  * Parameter     Type        Description
  * offset        integer     Requested index for start of resources to be provided in response requested by client
  * limit         integer     Requested number of resources to be provided in response requested by client
- *
+ * <p>
  * The above pagination query parameters support both getting a page in the middle of a resultset and the
  * capability to get the next page.
  * If the offset query parameter is missing then it must default to zero
- *
+ * <p>
  * ?limit=20 Get the first twenty matching resources.
  * ?offset=0&limit=20 Get the first twenty matching resources.
  * ?offset=10&limit=20 Get the twenty resources starting at the tenth
- *
- * */
+ */
 public class OffsetLimitPageRequest implements TMFPageable {
 
     private static final long serialVersionUID = -25822477129613575L;
@@ -78,7 +78,8 @@ public class OffsetLimitPageRequest implements TMFPageable {
     }
 
     public OffsetLimitPageRequest previous() {
-        return hasPrevious() ? new OffsetLimitPageRequest((int) getOffset() - getPageSize(), getPageSize(), getSort()) : this;
+        return hasPrevious() ? new OffsetLimitPageRequest((int) getOffset() - getPageSize(), getPageSize(),
+                getSort()) : this;
     }
 
 
@@ -93,18 +94,23 @@ public class OffsetLimitPageRequest implements TMFPageable {
     }
 
     @Override
+    public Pageable withPage(int pageNumber) {
+        throw new RuntimeException("Not implemented yet");
+    }
+
+    @Override
     public boolean hasPrevious() {
         return offset > limit;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         OffsetLimitPageRequest that = (OffsetLimitPageRequest) o;
-        return limit == that.limit &&
-                offset == that.offset &&
-                Objects.equals(sort, that.sort);
+        return limit == that.limit && offset == that.offset && Objects.equals(sort, that.sort);
     }
 
     @Override
@@ -114,10 +120,7 @@ public class OffsetLimitPageRequest implements TMFPageable {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", OffsetLimitPageRequest.class.getSimpleName() + "[", "]")
-                .add("limit=" + limit)
-                .add("offset=" + offset)
-                .add("sort=" + sort)
-                .toString();
+        return new StringJoiner(", ", OffsetLimitPageRequest.class.getSimpleName() + "[", "]").add("limit=" + limit)
+                .add("offset=" + offset).add("sort=" + sort).toString();
     }
 }

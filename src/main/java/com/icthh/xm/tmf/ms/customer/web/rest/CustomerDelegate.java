@@ -1,7 +1,5 @@
 package com.icthh.xm.tmf.ms.customer.web.rest;
 
-import static org.springframework.http.ResponseEntity.ok;
-
 import com.codahale.metrics.annotation.Timed;
 import com.icthh.xm.commons.lep.LogicExtensionPoint;
 import com.icthh.xm.commons.lep.spring.LepService;
@@ -13,11 +11,14 @@ import com.icthh.xm.tmf.ms.customer.model.Customer;
 import com.icthh.xm.tmf.ms.customer.model.CustomerCreate;
 import com.icthh.xm.tmf.ms.customer.model.PatchOperation;
 import com.icthh.xm.tmf.ms.customer.service.CustomerService;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+import static org.springframework.http.ResponseEntity.ok;
 
 @Component
 @LepService(group = "service", name = "default")

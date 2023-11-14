@@ -8,11 +8,12 @@ import com.icthh.xm.tmf.ms.customer.api.v31.CustomerV31ApiDelegate;
 import com.icthh.xm.tmf.ms.customer.lep.keyresolver.ProfileHeaderKeyResolver;
 import com.icthh.xm.tmf.ms.customer.model.v31.Customer;
 import com.icthh.xm.tmf.ms.customer.model.v31.PatchOperation;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @LepService(group = "service")

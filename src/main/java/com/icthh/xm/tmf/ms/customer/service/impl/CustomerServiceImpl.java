@@ -1,10 +1,5 @@
 package com.icthh.xm.tmf.ms.customer.service.impl;
 
-import static com.icthh.xm.tmf.ms.customer.util.StringUtil.toStringList;
-import static java.util.Objects.isNull;
-import static java.util.Optional.ofNullable;
-import static java.util.stream.Collectors.toSet;
-
 import com.google.common.annotations.VisibleForTesting;
 import com.icthh.xm.commons.exceptions.BusinessException;
 import com.icthh.xm.tmf.ms.customer.domain.CustomerCharacteristicEntity;
@@ -16,17 +11,20 @@ import com.icthh.xm.tmf.ms.customer.model.PatchOperation;
 import com.icthh.xm.tmf.ms.customer.repository.CustomerCharacteristicRepository;
 import com.icthh.xm.tmf.ms.customer.service.CustomerConfigurationService;
 import com.icthh.xm.tmf.ms.customer.service.CustomerService;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+
+import javax.transaction.Transactional;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.Collections.emptyList;
+import static java.util.Objects.isNull;
+import static java.util.Optional.ofNullable;
+import static java.util.stream.Collectors.toSet;
 
 @Slf4j
 @Service
@@ -39,7 +37,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> getCustomer(String id, String profile, String fields) {
-        Collection<String> fieldsList = toStringList(fields);
+        Collection<String> fieldsList = ofNullable(fields)
+                .map(f -> f.split(",", -1))
+                .map(Arrays::asList)
+                .orElse(emptyList());
         return toCustomers(fieldsList,
             customerCharacteristicRepository.findAllByCustomerIdAndKeyIn(id, fieldsList)
         );
