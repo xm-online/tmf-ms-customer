@@ -3,8 +3,9 @@ package com.icthh.xm.tmf.ms.customer.service;
 import com.icthh.xm.tmf.ms.customer.domain.CustomerCharacteristicEntity;
 import com.icthh.xm.tmf.ms.customer.model.Customer;
 import com.icthh.xm.tmf.ms.customer.model.PatchOperation;
-import java.util.List;
 import org.springframework.data.jpa.domain.Specification;
+
+import java.util.List;
 
 /**
  * Describes a service that deals with
@@ -12,7 +13,7 @@ import org.springframework.data.jpa.domain.Specification;
 public interface CustomerService {
 
     /**
-     * Gets customer by {@code id}.
+     * Gets customer by {@code id}.r5ew32
      *
      * @param id      unique identifier of the customer
      * @param profile customer profile

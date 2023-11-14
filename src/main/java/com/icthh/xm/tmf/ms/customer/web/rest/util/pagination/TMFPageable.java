@@ -1,7 +1,8 @@
 package com.icthh.xm.tmf.ms.customer.web.rest.util.pagination;
 
-import java.io.Serializable;
 import org.springframework.data.domain.Pageable;
+
+import java.io.Serializable;
 
 public interface TMFPageable extends Pageable, Serializable {
 

@@ -1,12 +1,13 @@
 package com.icthh.xm.tmf.ms.customer.mapper;
 
-import static java.util.stream.Collectors.toList;
-
 import com.icthh.xm.tmf.ms.customer.domain.CustomerCharacteristicEntity;
 import com.icthh.xm.tmf.ms.customer.model.Characteristic;
+import org.springframework.stereotype.Component;
+
 import java.util.Collection;
 import java.util.List;
-import org.springframework.stereotype.Component;
+
+import static java.util.stream.Collectors.toList;
 
 @Component
 public class CustomerCharacteristicMapper {

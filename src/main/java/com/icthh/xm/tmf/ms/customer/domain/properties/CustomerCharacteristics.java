@@ -3,10 +3,11 @@ package com.icthh.xm.tmf.ms.customer.domain.properties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import java.util.List;
-import javax.annotation.Nullable;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
