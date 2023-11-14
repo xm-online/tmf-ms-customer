@@ -1,20 +1,8 @@
 # tmf-ms-customer
 
-This application was generated using JHipster 7.8.1, you can find documentation and help at [https://www.jhipster.tech](https://www.jhipster.tech).
+This application was generated using xm-ms-template [https://github.com/xm-online/xm-ms-template](https://github.com/xm-online/xm-ms-template).
 
-This is a "microservice" application intended to be part of a microservice architecture, please refer to the [Doing microservices with JHipster][] page of the documentation for more information.
-
-## How to use this template
-1. Clone xm-ms-template to separate folder.
-2. Start project in you local XM environment and check if it is working, run tests.
-3. Remove `.git/` folder before project modification.
-4. Add project to new git repository where it will evolve and live.
-5. Find and replace `tmf-ms-customer` term everywhere in the projects.
-6. Find end remove everything related to `ExampleEntityFirst` and `ExampleEntitySecond` (after checking how it is proposed to use)
-7. Do you need to use database:
-   - if YES - correct liquibase scripts in `resources/config/liquibase`
-   - if NO - remove liquibase scripts, config `XmDatabaseConfiguration` and commons `xm-commons-migration-db`
-8. Check all `com.icthh.xm.commons` libraries in `build.gradle` and remove redundant. try to keep minimum set of commons.
+This is a "microservice" application intended to be part of a microservice architecture.
 
 ## Project Structure
 
@@ -124,26 +112,6 @@ interfaces to provide automatic authorization and simple declarative request con
 
 By design Services should never expose DB Entities outside. All communication with controllers should be using DTOs.
 [Mapstruct](https://mapstruct.org/) is advised to use for mapping Entities to DTOs and vice versa.
-
-Typical Service & DTO pattern:
-```java
-    @Override
-    public ExampleEntityFirstDto save(ExampleEntityFirstDto exampleEntityFirstDto) {
-        ExampleEntityFirst exampleEntityFirst = exampleEntityFirstMapper.toEntity(exampleEntityFirstDto);
-        exampleEntityFirst = exampleEntityFirstRepository.save(exampleEntityFirst);
-        return exampleEntityFirstMapper.toDto(exampleEntityFirst);
-    }
-```
-
-### CI/CD
-
-[//]: # (TODO: define travice/gitlab file)
-
-### Actuator
-
-#### Healthcheck
-
-[//]: # (TODO: need to find helathckeck for Kafka)
 
 #### Metrics
 Metrics should be collected in Prometheus format using Micrometer.
@@ -305,23 +273,3 @@ docker-compose -f src/main/docker/app.yml up -d
 ```
 
 For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`jhipster docker-compose`), which is able to generate docker configurations for one or several JHipster applications.
-
-## Continuous Integration (optional)
-
-To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
-
-[jhipster homepage and latest documentation]: https://www.jhipster.tech
-[jhipster 7.8.1 archive]: https://www.jhipster.tech
-[doing microservices with jhipster]: https://www.jhipster.tech/microservices-architecture/
-[using jhipster in development]: https://www.jhipster.tech/development/
-[service discovery and configuration with consul]: https://www.jhipster.tech/microservices-architecture/#consul
-[using docker and docker-compose]: https://www.jhipster.tech/docker-compose
-[using jhipster in production]: https://www.jhipster.tech/production/
-[running tests page]: https://www.jhipster.tech/running-tests/
-[code quality page]: https://www.jhipster.tech/code-quality/
-[setting up continuous integration]: https://www.jhipster.tech/setting-up-ci/
-[node.js]: https://nodejs.org/
-[npm]: https://www.npmjs.com/
-[openapi-generator]: https://openapi-generator.tech
-[swagger-editor]: https://editor.swagger.io
-[doing api-first development]: https://www.jhipster.tech/doing-api-first-development/
