@@ -18,10 +18,10 @@ import java.util.List;
 @Component
 public class DefaultCustomerApiDelegate implements CustomerApiDelegate {
 
-    private final CustomerApDelegateProvider tenantCustomerDelegateProvider;
+    private final CustomerApiDelegateProvider tenantCustomerDelegateProvider;
     private final TenantContextHolder tenantContextHolder;
 
-    public DefaultCustomerApiDelegate(CustomerApDelegateProvider tenantCustomerDelegateProvider,
+    public DefaultCustomerApiDelegate(CustomerApiDelegateProvider tenantCustomerDelegateProvider,
                                       TenantContextHolder tenantContextHolder) {
         this.tenantCustomerDelegateProvider = tenantCustomerDelegateProvider;
         this.tenantContextHolder = tenantContextHolder;

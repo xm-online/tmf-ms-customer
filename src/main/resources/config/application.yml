@@ -153,6 +153,8 @@ spring:
             authorization-grant-type: client_credentials
             client-id: internal
             client-secret: internal
+  autoconfigure:
+    exclude: com.icthh.xm.tmf.ms.customer.config.XmTenantAutoConfiguration
 
 server:
   servlet:

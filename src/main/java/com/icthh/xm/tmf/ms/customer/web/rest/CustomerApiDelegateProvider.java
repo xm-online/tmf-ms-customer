@@ -11,13 +11,17 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class CustomerApDelegateProvider {
+public class CustomerApiDelegateProvider {
 
     private final Map<String, Map<String, CustomerApiDelegate>> delegatesMap;
     private final LepCustomerDelegate lepCustomerDelegate;
 
-    public CustomerApDelegateProvider(List<SpringCustomerApiDelegate> customerApiDelegates,
-                                      LepCustomerDelegate lepCustomerDelegate) {
+    // XM:
+    //  LANGUAGE: springBeanlanguage
+    //  BONUSES: springBeaBonuses
+
+    public CustomerApiDelegateProvider(List<SpringCustomerApiDelegate> customerApiDelegates,
+                                       LepCustomerDelegate lepCustomerDelegate) {
         this.delegatesMap = new HashMap<>(customerApiDelegates.size());
         customerApiDelegates.forEach(delegate -> {
             String tenant = delegate.getTenant();
