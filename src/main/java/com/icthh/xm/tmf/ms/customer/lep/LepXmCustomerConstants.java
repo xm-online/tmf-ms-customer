@@ -15,6 +15,7 @@ public final class LepXmCustomerConstants {
     public static final String BINDING_SUB_KEY_CUSTOMER_SERVICE = "customerService";
     public static final String BINDING_KEY_TEMPLATES = "templates";
     public static final String BINDING_SUB_KEY_TEMPLATE_REST = "rest";
+    public static final String BINDING_SUB_KEY_TEMPLATE_REDIS  = "redis";
     public static final String BINDING_SUB_KEY_TEMPLATE_JDBC = "jdbc";
     public static final String BINDING_SUB_KEY_SERVICE_SEPARATE_TRANSACTION_EXECUTOR = "separateTransactionExecutor";
     public static final String BINDING_SUB_KEY_XM_AUTHENTICATION_CONTEXT_HOLDER = "xmAuthenticationContextHolder";

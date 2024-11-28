@@ -62,7 +62,8 @@ spring:
             enabled: false
     thymeleaf:
         mode: HTML
-
+    cache:
+        type: redis
 
 server:
     port: 10344

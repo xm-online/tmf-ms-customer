@@ -10,6 +10,7 @@ import com.icthh.xm.tmf.ms.customer.service.SeparateTransactionExecutor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,6 +24,7 @@ public class LepAppEventListenerConfiguration {
     XmMsLepProcessingApplicationListener buildLepProcessingApplicationListener(
         TenantConfigService tenantConfigService,
         @Qualifier("loadBalancedRestTemplate") RestTemplate restTemplate,
+        RedisTemplate<String, Object> redisTemplate,
         CommonsService commonsService,
         PermissionCheckService permissionCheckService,
         JdbcTemplate jdbcTemplate,
@@ -33,6 +35,7 @@ public class LepAppEventListenerConfiguration {
         return new XmMsLepProcessingApplicationListener(
             tenantConfigService,
             restTemplate,
+            redisTemplate,
             jdbcTemplate,
             commonsService,
             permissionCheckService,
