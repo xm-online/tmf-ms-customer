@@ -9,6 +9,7 @@ import com.icthh.xm.commons.security.XmAuthenticationContextHolder;
 import com.icthh.xm.lep.api.ScopedContext;
 import com.icthh.xm.tmf.ms.customer.service.CustomerService;
 import com.icthh.xm.tmf.ms.customer.service.SeparateTransactionExecutor;
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.client.RestTemplate;
@@ -34,6 +35,7 @@ public class XmMsLepProcessingApplicationListener extends SpringLepProcessingApp
     private final SeparateTransactionExecutor transactionExecutor;
     private final CustomerService customerService;
     private final XmAuthenticationContextHolder xmAuthenticationContextHolder;
+    private final MeterRegistry meterRegistry;
 
     @Override
     protected void bindExecutionContext(ScopedContext executionContext) {
@@ -47,6 +49,7 @@ public class XmMsLepProcessingApplicationListener extends SpringLepProcessingApp
 
         executionContext.setValue(BINDING_KEY_COMMONS, new CommonsExecutor(commonsService));
         executionContext.setValue(BINDING_KEY_SERVICES, services);
+        executionContext.setValue(BINDING_KEY_METER_REGISTRY, meterRegistry);
 
         // templates
         Map<String, Object> templates = new HashMap<>();
