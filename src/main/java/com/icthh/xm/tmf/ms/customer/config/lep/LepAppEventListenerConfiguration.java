@@ -7,6 +7,7 @@ import com.icthh.xm.commons.security.XmAuthenticationContextHolder;
 import com.icthh.xm.tmf.ms.customer.lep.XmMsLepProcessingApplicationListener;
 import com.icthh.xm.tmf.ms.customer.service.CustomerService;
 import com.icthh.xm.tmf.ms.customer.service.SeparateTransactionExecutor;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +29,8 @@ public class LepAppEventListenerConfiguration {
         JdbcTemplate jdbcTemplate,
         SeparateTransactionExecutor transactionExecutor,
         CustomerService customerService,
-        XmAuthenticationContextHolder xmAuthenticationContextHolder) {
+        XmAuthenticationContextHolder xmAuthenticationContextHolder,
+        MeterRegistry meterRegistry) {
 
         return new XmMsLepProcessingApplicationListener(
             tenantConfigService,
@@ -38,7 +40,8 @@ public class LepAppEventListenerConfiguration {
             permissionCheckService,
             transactionExecutor,
             customerService,
-            xmAuthenticationContextHolder
+            xmAuthenticationContextHolder,
+            meterRegistry
         );
     }
 
