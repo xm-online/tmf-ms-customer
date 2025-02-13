@@ -1,6 +1,7 @@
 package com.icthh.xm.tmf.ms.customer.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.client.loadbalancer.RestTemplateCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,17 @@ public class RestTemplateConfiguration {
         RestTemplate restTemplate = new RestTemplate();
         customizer.customize(restTemplate);
         return restTemplate;
+    }
+
+    @Bean
+    @ConditionalOnProperty(
+        value = {"spring.cloud.loadbalancer.enabled"},
+        havingValue = "false"
+    )
+    public RestTemplateCustomizer restTemplateCustomizer() {
+        return restTemplate -> {
+            //do nothing
+        };
     }
 
     @Bean
