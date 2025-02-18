@@ -71,6 +71,8 @@ spring:
   main:
     allow-bean-definition-overriding: true
   cloud:
+    loadbalancer:
+      enabled: true
     # if you need to start service without consul, use next configuration and disable consul by spring.cloud.consul.enabled
 #    discovery:
 #      client:
