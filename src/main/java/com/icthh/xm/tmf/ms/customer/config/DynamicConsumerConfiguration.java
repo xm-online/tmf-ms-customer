@@ -4,9 +4,10 @@ import com.icthh.xm.commons.config.client.repository.TenantListRepository;
 import com.icthh.xm.commons.topic.service.DynamicConsumerConfigurationService;
 import com.icthh.xm.commons.topic.service.TopicManagerService;
 import java.util.List;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
+@DependsOn("topicConfigurationService")
 @Component
 public class DynamicConsumerConfiguration extends DynamicConsumerConfigurationService{
 
