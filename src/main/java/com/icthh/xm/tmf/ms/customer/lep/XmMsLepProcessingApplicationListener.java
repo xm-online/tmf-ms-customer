@@ -35,7 +35,7 @@ public class XmMsLepProcessingApplicationListener implements LepContextFactory {
     private final MeterRegistry meterRegistry;
 
     public XmMsLepProcessingApplicationListener(TenantConfigService tenantConfigService,
-        @Qualifier("loadBalancedRestTemplate") RestTemplate restTemplate,
+        @Qualifier("customerRestTemplate") RestTemplate restTemplate,
         JdbcTemplate jdbcTemplate,
         CommonsService commonsService,
         PermissionCheckService permissionCheckService,
