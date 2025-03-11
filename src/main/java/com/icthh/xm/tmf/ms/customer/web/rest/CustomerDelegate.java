@@ -6,7 +6,6 @@ import com.icthh.xm.commons.lep.spring.LepService;
 import com.icthh.xm.commons.permission.annotation.PrivilegeDescription;
 import com.icthh.xm.tmf.ms.customer.api.CustomerApiDelegate;
 import com.icthh.xm.tmf.ms.customer.lep.keyresolver.ProfileHeaderKeyResolver;
-import com.icthh.xm.tmf.ms.customer.lep.keyresolver.ProfileKeyResolver;
 import com.icthh.xm.tmf.ms.customer.model.Customer;
 import com.icthh.xm.tmf.ms.customer.model.CustomerCreate;
 import com.icthh.xm.tmf.ms.customer.model.PatchOperation;
@@ -21,14 +20,14 @@ import java.util.List;
 import static org.springframework.http.ResponseEntity.ok;
 
 @Component
-@LepService(group = "service", name = "default")
+@LepService(group = "service")
 @AllArgsConstructor
 public class CustomerDelegate implements CustomerApiDelegate {
 
     private final CustomerService customerService;
 
     @Timed
-    @LogicExtensionPoint(value = "RetrieveCustomer", resolver = ProfileKeyResolver.class)
+    @LogicExtensionPoint(value = "RetrieveCustomer", resolver = ProfileHeaderKeyResolver.class)
     @PreAuthorize("hasPermission({'id': #id, 'profile': #profile}, 'CUSTOMER.GET')")
     @PrivilegeDescription("Privilege to get a customer")
     @Override
@@ -48,7 +47,7 @@ public class CustomerDelegate implements CustomerApiDelegate {
     }
 
     @Timed
-    @LogicExtensionPoint(value = "RetrieveCustomer", resolver = ProfileKeyResolver.class)
+    @LogicExtensionPoint(value = "RetrieveCustomer", resolver = ProfileHeaderKeyResolver.class)
     @PreAuthorize("hasPermission({'id': #id, 'profile': #profile}, 'CUSTOMER.GET')")
     @PrivilegeDescription("Privilege to get a customers list")
     @Override

@@ -1,24 +1,37 @@
 package com.icthh.xm.tmf.ms.customer.config.lep;
 
 
-import com.icthh.xm.commons.lep.BaseProceedingLep;
-import com.icthh.xm.commons.lep.spring.LepThreadHelper;
-import com.icthh.xm.commons.lep.spring.lepservice.LepServiceFactory;
-import com.icthh.xm.commons.logging.trace.TraceService;
-import com.icthh.xm.commons.security.XmAuthenticationContext;
-import com.icthh.xm.commons.tenant.TenantContext;
+import com.icthh.xm.commons.config.client.service.TenantConfigService;
+import com.icthh.xm.commons.lep.api.BaseLepContext;
+import com.icthh.xm.commons.logging.trace.TraceService.TraceServiceField;
+import com.icthh.xm.commons.permission.service.PermissionCheckService;
+import com.icthh.xm.commons.security.XmAuthenticationContextHolder;
+import com.icthh.xm.tmf.ms.customer.service.CustomerService;
+import com.icthh.xm.tmf.ms.customer.service.SeparateTransactionExecutor;
+import io.micrometer.core.instrument.MeterRegistry;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.client.RestTemplate;
 
-public class LepContext {
+public class LepContext extends BaseLepContext implements TraceServiceField {
 
-    public Object commons;
-    public Object inArgs;
-    public BaseProceedingLep lep;
-    public LepThreadHelper thread;
-    public XmAuthenticationContext authContext;
-    public TenantContext tenantContext;
-    public Object methodResult;
-    public LepServiceFactory lepServices;
-    public TraceService traceService;
+    public LepServices services;
+    public LepTemplates templates;
+    public MeterRegistry meterRegistry;
+
+    public static class LepServices {
+
+        public TenantConfigService tenantConfigService;
+        public PermissionCheckService permissionService;
+        public SeparateTransactionExecutor separateTransactionExecutor;
+        public CustomerService customerService;
+        public XmAuthenticationContextHolder xmAuthenticationContextHolder;
+    }
+
+    public static class LepTemplates {
+
+        public RestTemplate rest;
+        public JdbcTemplate jdbc;
+    }
 
 }
 
