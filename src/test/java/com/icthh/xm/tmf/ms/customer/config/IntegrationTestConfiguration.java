@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cloud.client.loadbalancer.RestTemplateCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -79,6 +79,12 @@ public class IntegrationTestConfiguration {
     @Primary
     public TokenProvider tokenProvider() {
         return mock(TokenProvider.class);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(value = RestTemplateCustomizer.class)
+    public RestTemplateCustomizer restTemplateCustomizer() {
+        return mock(RestTemplateCustomizer.class);
     }
 
     @Bean(XM_CONFIG_REST_TEMPLATE)
