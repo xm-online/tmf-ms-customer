@@ -15,6 +15,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.loadbalancer.config.BlockingLoadBalancerClientAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 import tech.jhipster.config.DefaultProfileUtil;
@@ -27,7 +28,8 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
 
-@SpringBootApplication(scanBasePackages = "com.icthh.xm")
+@SpringBootApplication(scanBasePackages = "com.icthh.xm", exclude = {
+    BlockingLoadBalancerClientAutoConfiguration.class})
 @EnableConfigurationProperties({ LiquibaseProperties.class, ApplicationProperties.class })
 public class CustomerApp {
 
