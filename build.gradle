@@ -210,6 +210,7 @@ dependencies {
 
     implementation "org.springframework.cloud:spring-cloud-starter"
     implementation "org.springframework.cloud:spring-cloud-starter-bootstrap"
+    implementation "org.springframework.cloud:spring-cloud-starter-consul-discovery"
     implementation "org.springframework.cloud:spring-cloud-starter-consul-config"
     implementation "org.springframework.security:spring-security-config"
     implementation "org.springframework.security:spring-security-data"
