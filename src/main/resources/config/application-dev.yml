@@ -6,12 +6,6 @@ logging:
     com.icthh.xm.tmf.ms.customer: DEBUG
 
 spring:
-  devtools:
-    restart:
-      enabled: true
-      additional-exclude: static/**,.h2.server.properties
-    livereload:
-      enabled: false
   jackson:
     serialization:
       indent-output: true
@@ -28,6 +22,8 @@ spring:
           - git-branch=${git.branch:}
       host: localhost
       port: 7777
+    loadbalancer:
+      enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:h2:mem:customer;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
@@ -64,3 +60,8 @@ jhipster:
       port: 5000
 
 # application:
+application:
+  rest:
+    timeouts:
+      read_timeout: PT15S
+      connection_timeout: PT15S

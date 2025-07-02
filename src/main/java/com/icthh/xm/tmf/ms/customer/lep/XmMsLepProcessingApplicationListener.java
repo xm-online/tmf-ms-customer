@@ -67,8 +67,6 @@ public class XmMsLepProcessingApplicationListener implements LepContextFactory {
 
         lepContext.meterRegistry = meterRegistry;
 
-        lepContext.commons = commonsService;
-
         // templates
         lepContext.templates = new LepContext.LepTemplates();
         lepContext.templates.rest = restTemplate;
