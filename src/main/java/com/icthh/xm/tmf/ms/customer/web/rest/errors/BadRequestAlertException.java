@@ -1,13 +1,12 @@
 package com.icthh.xm.tmf.ms.customer.web.rest.errors;
 
-import com.icthh.xm.commons.exceptions.BusinessException;
-
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
+import org.zalando.problem.AbstractThrowableProblem;
+import org.zalando.problem.Status;
 
-// TODO replace by BusinessException
-public class BadRequestAlertException extends BusinessException {
+public class BadRequestAlertException extends AbstractThrowableProblem {
 
     private static final long serialVersionUID = 1L;
 
@@ -20,7 +19,7 @@ public class BadRequestAlertException extends BusinessException {
     }
 
     public BadRequestAlertException(URI type, String defaultMessage, String entityName, String errorKey) {
-        super(type.toString(), defaultMessage, getAlertParameters(entityName, errorKey));
+        super(type, defaultMessage, Status.BAD_REQUEST, null, null, null, getAlertParameters(entityName, errorKey));
         this.entityName = entityName;
         this.errorKey = errorKey;
     }
@@ -33,8 +32,8 @@ public class BadRequestAlertException extends BusinessException {
         return errorKey;
     }
 
-    private static Map<String, String> getAlertParameters(String entityName, String errorKey) {
-        Map<String, String> parameters = new HashMap<>();
+    private static Map<String, Object> getAlertParameters(String entityName, String errorKey) {
+        Map<String, Object> parameters = new HashMap<>();
         parameters.put("message", "error." + errorKey);
         parameters.put("params", entityName);
         return parameters;
