@@ -22,6 +22,7 @@ plugins {
     id "io.spring.nohttp"
     id 'pmd'
     id "com.github.spotbugs"
+    id "war"
     //jhipster-needle-gradle-plugins - JHipster will add additional gradle plugins here
 }
 
