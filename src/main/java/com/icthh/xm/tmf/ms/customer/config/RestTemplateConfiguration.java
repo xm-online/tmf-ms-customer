@@ -1,9 +1,8 @@
 package com.icthh.xm.tmf.ms.customer.config;
 
-import com.icthh.xm.commons.config.client.config.XmTimeoutProperties;
+import com.icthh.xm.tmf.ms.customer.config.ApplicationProperties.CustomerTimeoutProperties;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -24,10 +23,11 @@ public class RestTemplateConfiguration {
     @Bean("customerRestTemplate")
     public RestTemplate restTemplateWithLoadBalancer(RestTemplateBuilder restTemplateBuilder,
         RestTemplateCustomizer customizer,
-        ObjectProvider<XmTimeoutProperties> timeoutPropertiesProvider) {
+        ApplicationProperties applicationProperties) {
         log.info("restTemplateWithLoadBalancer creation with loadBalancer started");
 
-        RestTemplate restTemplate = createRestTemplate(restTemplateBuilder, timeoutPropertiesProvider);
+        RestTemplate restTemplate = createRestTemplate(restTemplateBuilder,
+            applicationProperties.getCustomerTimeouts());
 
         customizer.customize(restTemplate);
         return restTemplate;
@@ -36,21 +36,19 @@ public class RestTemplateConfiguration {
     @Bean("customerRestTemplate")
     @ConditionalOnMissingBean(name = "customerRestTemplate")
     public RestTemplate vanillaRestTemplate(RestTemplateBuilder restTemplateBuilder,
-        ObjectProvider<XmTimeoutProperties> timeoutPropertiesProvider) {
+        ApplicationProperties applicationProperties) {
         log.info("vanillaRestTemplate creation without loadBalancer started");
-        return createRestTemplate(restTemplateBuilder, timeoutPropertiesProvider);
+        return createRestTemplate(restTemplateBuilder, applicationProperties.getCustomerTimeouts());
     }
 
     private RestTemplate createRestTemplate(RestTemplateBuilder restTemplateBuilder,
-        ObjectProvider<XmTimeoutProperties> timeoutPropertiesProvider) {
+        CustomerTimeoutProperties customerTimeoutProperties) {
 
-        XmTimeoutProperties timeoutProperties = timeoutPropertiesProvider.getIfAvailable();
-
-        if (Objects.nonNull(timeoutProperties)) {
-            log.info("customerCreateRestTemplate with timeouts={}", timeoutProperties);
+        if (Objects.nonNull(customerTimeoutProperties)) {
+            log.info("customerCreateRestTemplate with timeouts={}", customerTimeoutProperties);
             return restTemplateBuilder
-                .setConnectTimeout(timeoutProperties.getConnectionTimeout())
-                .setReadTimeout(timeoutProperties.getReadTimeout())
+                .setConnectTimeout(customerTimeoutProperties.getConnectionTimeout())
+                .setReadTimeout(customerTimeoutProperties.getReadTimeout())
                 .build();
         }
         log.info("customerCreateRestTemplate without timeouts");
