@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="20200921000000" author="vkhoroshko">
+    <changeSet id="20200921000000" author="vkhoroshko" objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
         <createTable tableName="customer_characteristic">
 
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
@@ -32,9 +32,9 @@
         </createIndex>
 
         <addUniqueConstraint
-            columnNames="customer_id, key"
-            constraintName="unique_customer_id_key_constraint"
-            tableName="customer_characteristic"
+                columnNames="customer_id, key"
+                constraintName="unique_customer_id_key_constraint"
+                tableName="customer_characteristic"
         />
     </changeSet>
 </databaseChangeLog>

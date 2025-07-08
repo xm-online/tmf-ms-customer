@@ -20,7 +20,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
 @Component
-@LepService(group = "service", name = "default")
+@LepService(group = "service")
 @AllArgsConstructor
 public class CustomerDelegate implements CustomerApiDelegate {
 
@@ -32,8 +32,8 @@ public class CustomerDelegate implements CustomerApiDelegate {
     @PrivilegeDescription("Privilege to get a customer")
     @Override
     public ResponseEntity<List<Customer>> retrieveCustomer(String id,
-                                                           String profile,
-                                                           String fields) {
+        String profile,
+        String fields) {
         return ok(customerService.getCustomer(id, profile, fields));
     }
 

@@ -1,6 +1,6 @@
 package com.icthh.xm.tmf.ms.customer.service.impl;
 
-import static com.icthh.xm.tmf.ms.customer.util.StringUtil.toStringList;
+import static java.util.Collections.emptyList;
 import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toSet;
@@ -16,6 +16,7 @@ import com.icthh.xm.tmf.ms.customer.model.PatchOperation;
 import com.icthh.xm.tmf.ms.customer.repository.CustomerCharacteristicRepository;
 import com.icthh.xm.tmf.ms.customer.service.CustomerConfigurationService;
 import com.icthh.xm.tmf.ms.customer.service.CustomerService;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +40,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> getCustomer(String id, String profile, String fields) {
-        Collection<String> fieldsList = toStringList(fields);
+        Collection<String> fieldsList = ofNullable(fields)
+            .map(f -> f.split(",", -1))
+            .map(Arrays::asList)
+            .orElse(emptyList());
         return toCustomers(fieldsList,
             customerCharacteristicRepository.findAllByCustomerIdAndKeyIn(id, fieldsList)
         );
@@ -84,7 +88,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private void addOrReplace(String customerId, Characteristic characteristic,
-                              CustomerCharacteristics.Characteristic config) {
+        CustomerCharacteristics.Characteristic config) {
 
         if (isDefaultValue(characteristic, config)) {
             log.debug("The new value is a default one, removing from the db if any");
@@ -95,7 +99,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private boolean isDefaultValue(Characteristic characteristic,
-                                   CustomerCharacteristics.Characteristic config) {
+        CustomerCharacteristics.Characteristic config) {
         return ofNullable(characteristic)
             .filter(ch -> Optional.ofNullable(config.getDefaultValue())
                 .map(def -> def.equals(characteristic.getValue())).orElse(false))
@@ -109,7 +113,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private CustomerCharacteristicEntity updateAttributes(Characteristic characteristic,
-                                                          CustomerCharacteristicEntity entity) {
+        CustomerCharacteristicEntity entity) {
         entity.setKey(characteristic.getName());
         entity.setValue(characteristic.getValue());
         return entity;
@@ -133,7 +137,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private boolean fitConstraints(Characteristic characteristic,
-                                   CustomerCharacteristics.Characteristic characteristicConfig) {
+        CustomerCharacteristics.Characteristic characteristicConfig) {
         return Optional.of(characteristicConfig)
             .filter(config -> isInPredefinedValues(config.getPredefinedValues(), characteristic.getValue()))
             .filter(config -> isFitRegExp(config.getRegexp(), characteristic.getValue()))
@@ -176,7 +180,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private List<Customer> toCustomers(Collection<String> requestedFields,
-                                       Collection<CustomerCharacteristicEntity> foundFields) {
+        Collection<CustomerCharacteristicEntity> foundFields) {
 
         Collection<CustomerCharacteristicEntity> withDefaultValues =
             fillDefaultValues(requestedFields, foundFields);
@@ -199,7 +203,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private void addDefaultValue(Set<String> foundFields, String requestedField,
-                                 Collection<CustomerCharacteristicEntity> characteristicEntities) {
+        Collection<CustomerCharacteristicEntity> characteristicEntities) {
 
         if (!foundFields.contains(requestedField)) {
             createDefaultValue(characteristicEntities, requestedField);
@@ -207,7 +211,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private void createDefaultValue(Collection<CustomerCharacteristicEntity> characteristicEntities,
-                                    String requestedField) {
+        String requestedField) {
         ofNullable(getDefaultValue(requestedField))
             .ifPresent(defaultValue -> characteristicEntities.add(
                 mapper.toNewCharacteristic(requestedField, defaultValue)));
