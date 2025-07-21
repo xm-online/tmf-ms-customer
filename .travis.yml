@@ -1,4 +1,3 @@
-dist: trusty
 language: java
 jdk:
   - openjdk17
@@ -10,6 +9,8 @@ addons:
       secure: jcjys3XqEkT27abMcM+/UgqmOi915N7zHtdpbi+tl+P0hND2CXtltkC3nGym6HHqw62ZaM1E2TWGadgZloLDs28kSfJ2swratfSP0cVaPUHenKNL6/L2sdn4B+LcN9sEIWkitI/1B9SjOyfK6tdk3WWoeajWmJwB0/AsqIqKEShfMUBNC83U/MvlT25cRfCEd9+AEZEpslS1lwQxIlyf7lOpAPFAczrFIJAKj3HCN4N8vsP6THSyw+B4TVbsPk9qF9zfNlWRFlDpiybNkGUDOTjR9PUVpptyCDOEE2kP3KUXtRuTSe2QL+kAAmEk9TJEDetDydKcELwB/xkHPGCvrudAKhiIUK49z6czqQz4jr9fJg864iR999/L1P8PR9SMButN8EubZ/FOXc7LNrNXj2IMLkwsO4ok/j/xoPibGTnWn49kEF3OrDi4dTn9BXrz+vNDMsXbpTnZN4pS4g6TcuQRHcoJ2I/2/XBxGrNQORXvxUL7215R3GjoCG9LegSphYgy5jsil9hOJ3jhjvqAc1S1ZWFdBJ1A4NFDB9HdLmuUyPRizQB5pfQxK74YoWiTfvenui5ed5HbK5D+l9mLUHqYsNqi2XVeL+VSaznuiHIA/8tr2avr9Pl62mD2hpW1oWcBnph8TIBJFMTFuVjPDzm3thyCxSblbICxi9BMPOw=
     branches:
       - master
+      - main
+
 script:
   - set -e
   - "./gradlew --no-daemon --refresh-dependencies clean check test"
@@ -18,23 +19,23 @@ script:
   - export DOCKER_REPO=$(echo  -n $TRAVIS_REPO_SLUG | sed -e 's/^xm-online\//xmonline\//g')
   - export IMAGE_BRANCH=$(echo -n $TRAVIS_BRANCH | sed -e 's/\//-/g')
   - export PROJECT_VERSION="$IMAGE_BRANCH"
-  - if [ "$IMAGE_BRANCH" == "master" ];
+  - if [ "$TRAVIS_PULL_REQUEST" == "false" ];
     then
     PROJECT_VERSION=$(./gradlew -q  getProjectVersion);
     export SONAR_PK=$(echo  -n $TRAVIS_REPO_SLUG | sed -e 's/\//:/g');
-    ./gradlew -x test --no-daemon sonarqube -Dsonar.projectKey="$SONAR_PK"
-    -Dsonar.projectName="$SONAR_PK" -Dsonar.java.binaries="." -Dsonar.projectVersion="$IMAGE_BRANCH";
     TAGS="$PROJECT_VERSION $PROJECT_VERSION-$TRAVIS_BUILD_NUMBER $(echo $PROJECT_VERSION | awk -F '.' '{printf $1"."$2" "$1}') latest";
-    else
-    TAGS="$IMAGE_BRANCH $IMAGE_BRANCH-$TRAVIS_BUILD_NUMBER";
     fi
-  - docker build -t app-docker-img --label commit_id="$TRAVIS_COMMIT" --label version="$PROJECT_VERSION" --label build_number="$TRAVIS_BUILD_NUMBER" --label build_url="$TRAVIS_BUILD_WEB_URL" --label git_url="$TRAVIS_REPO_SLUG" --label commit_message="$TRAVIS_COMMIT_MESSAGE" -f src/main/docker/Dockerfile .
+  - TAG_ARGS=""'\]
   - for TAG in $TAGS;
     do
-    docker tag app-docker-img $DOCKER_REPO:$TAG;
-    docker push $DOCKER_REPO:$TAG;
+    TAG_ARGS="$TAG_ARGS -t $DOCKER_REPO:$TAG";
     done
-
+  - if [ "$TAG_ARGS" ];
+    then
+    docker buildx create --name multi-arch --platform "linux/arm64,linux/amd64,linux/arm/v8" --driver "docker-container" --use;
+    docker buildx build --platform linux/amd64,linux/arm64,linux/arm64/v8 $TAG_ARGS --label commit_id="$TRAVIS_COMMIT" --label version="$PROJECT_VERSION" --label build_number="$TRAVIS_BUILD_NUMBER" --label build_url="$TRAVIS_BUILD_WEB_URL" --label git_url="$TRAVIS_REPO_SLUG" --label commit_message="$TRAVIS_COMMIT_MESSAGE" --push -f src/main/docker/Dockerfile .;
+    docker buildx rm multi-arch || true;
+    fi
 cache:
   directories:
     - "~/.gradle"
