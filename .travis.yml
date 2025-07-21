@@ -48,7 +48,3 @@ notifications:
   slack:
     rooms:
       secure: DvrsDKUmry+hQEUPi0dRiwI/aQCET94iF6hFMjwhpX/IzLeukKzmakaicARVV2UKX04iJ6shMZsT2WXfwnuxmIJhJbHoSIiuQ2Zow8IuVf/ZeS2mKie5BwEM0wY+zdMzbXroJrfD1U9ynJlOihemMHnjYCENrMrkMQHtDY4c+miuHNLCeSUE7HT84Vd5GJwia/sW57ttRO1zXOQ1HUIk5bn3NG8m9DNcvETrIrV0F2WUEPHFIUgMVbqEl6rIKCshgBV+05AXUJYdCKaLxw6aQ02hq9RcksAQqSEZ1GLf0Q0ZCVf3FXzgsrDBSHTtAM6s5x+WcJNafb2Q4g7fCx3N16Ljx1VS5CrrX9nSOZnKFWCIfjSSolZ8PLAOCq+LKdIkuybjFrdkebDDLCPg+Xi0s9ROCQgE+9uNQZMERNZaviocDxu7Z1gHDp4LBY8izmW7Tq7nl+XKsXfcezCWeX/QrBeofvyzPfN8Zy5zoQgdnt9vMd3a+CxmTVt31zS7IEQySsTtgmZffunyyGOTvZXAhTDYyuYz9EeFz75Z8d5eKncsMVchYYTmClRonhwBJb/5TcVvztm9nB//WyKk2WLNi955rOMo+ZmKTPqowQ9U6U3F7Bbz789uhx1S4c9Mb8mN03Y0SFNmGYA8DAimrvcriBZs+fVwn+SGO2TanO3EFiE=
-branches:
-  only:
-    - master
-    - main
