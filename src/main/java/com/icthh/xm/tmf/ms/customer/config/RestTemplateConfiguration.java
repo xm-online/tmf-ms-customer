@@ -3,6 +3,7 @@ package com.icthh.xm.tmf.ms.customer.config;
 import com.icthh.xm.tmf.ms.customer.config.ApplicationProperties.CustomerTimeoutProperties;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.actuate.metrics.web.client.RestTemplateExchangeTagsProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -31,6 +32,16 @@ public class RestTemplateConfiguration {
 
         customizer.customize(restTemplate);
         return restTemplate;
+    }
+
+    @ConditionalOnProperty(
+        value = {"http.metrics.profile.aware"},
+        havingValue = "true"
+    )
+    @Bean
+    public RestTemplateExchangeTagsProvider tagProvider() {
+        log.info("creating profileAware metrics tag provider");
+        return new ProfileAwareRestTemplateExchangeTagsProvider();
     }
 
     @Bean("customerRestTemplate")
